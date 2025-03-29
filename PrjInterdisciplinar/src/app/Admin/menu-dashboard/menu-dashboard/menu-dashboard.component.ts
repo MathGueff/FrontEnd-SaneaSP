@@ -1,6 +1,7 @@
 import { Component, Input } from '@angular/core';
-import { OpcoesMenuAdmin } from '../../OpcoesSidebarMenuAdmin.enum';
+
 import { CommonModule } from '@angular/common';
+import { OpcoesSidebarMenuAdmin } from '../../OpcoesSidebarMenuAdmin.enum';
 
 @Component({
   selector: 'app-menu-dashboard',
@@ -10,5 +11,5 @@ import { CommonModule } from '@angular/common';
   styleUrl: './menu-dashboard.component.css'
 })
 export class MenuDashboardComponent {
-  @Input() teste : OpcoesMenuAdmin = OpcoesMenuAdmin.Doenca;
+  @Input() teste : OpcoesSidebarMenuAdmin = OpcoesSidebarMenuAdmin.Doenca;
 }

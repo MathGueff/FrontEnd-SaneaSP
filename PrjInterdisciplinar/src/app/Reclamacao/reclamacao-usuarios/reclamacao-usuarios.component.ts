@@ -1,31 +1,31 @@
-import { Reclamacao } from './../../models/reclamacao';
 import { Component, inject, OnInit } from '@angular/core';
 import { ReclamacaoCardComponent } from '../reclamacao-card/reclamacao-card.component';
-import { CommonModule } from '@angular/common';
-import { RouterLink } from '@angular/router';
-import { FormGroup, FormBuilder, ReactiveFormsModule } from '@angular/forms';
-import { BehaviorSubject, Observable } from 'rxjs';
 import { NotFoundComponent } from '../../Common/not-found/not-found.component';
+import { Reclamacao } from '../../models/reclamacao';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { UserService } from '../../Services/user.service';
-
+import { IUser } from '../../models/user.model';
+import { Router } from '@angular/router';
+import { CommonModule } from '@angular/common';
+import {FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 
 
 @Component({
-  selector: 'app-reclamacao-inicial',
+  selector: 'app-reclamacao-usuarios',
   standalone: true,
-  imports: [CommonModule, ReclamacaoCardComponent, RouterLink, ReactiveFormsModule,NotFoundComponent],
-  templateUrl: './reclamacao-inicial.component.html',
-  styleUrl: './reclamacao-inicial.component.css'
+  imports: [ReclamacaoCardComponent,NotFoundComponent,CommonModule, ReactiveFormsModule],
+  templateUrl: './reclamacao-usuarios.component.html',
+  styleUrl: './reclamacao-usuarios.component.css'
 })
-export class ReclamacaoInicialComponent implements OnInit {
-  protected userService = inject(UserService);
-  usuarioAtivo$ = this.userService.getObservableCurrentUser(); // Observable com as informações do admin
-
+export class ReclamacaoUsuariosComponent implements OnInit {
+  private userService = inject(UserService);
+  private router = inject(Router);
   private reclamacaoSubject =new BehaviorSubject<Reclamacao[]>([] as any);
-  data$:Observable<Reclamacao[]> = this.reclamacaoSubject.asObservable();
-  protected vazio: boolean = false;
-  erro : string = "";
-  TagSelect: FormGroup;
+  protected data$:Observable<Reclamacao[]> = this.reclamacaoSubject.asObservable();
+  protected user : IUser | null = this.userService.getCurrentUser();
+  protected vazio: boolean = true;
+  protected erro : string = "";
+  TagSelect : FormGroup;
   reclamacoes: Reclamacao [] = [
     {
       idReclamacao: 1,
@@ -128,42 +128,50 @@ export class ReclamacaoInicialComponent implements OnInit {
       }
     },
   ];
+
   constructor(private fb:FormBuilder){
-    this.reclamacaoSubject.next(this.reclamacoes);
     this.TagSelect = this.fb.group({
-        tagForm: ['Todos']
-      }
-    );
-  }
-
-  ngOnInit():void{
-    this.TagSelect.valueChanges.subscribe(() => {
-      let lista : Reclamacao [] = [];
-      //Verifica se nenhuma Tag foi selecionada
-      if(this.TagSelect.value.tagForm === "Todos" || this.TagSelect.value.tagForm == ""){
-        lista = this.reclamacoes;
-      }
-      // Filtra o array de Reclamações pela tag selecionada
-      else{
-        lista = this.reclamacoes.filter((reclamacao) =>{
-        return reclamacao.objTag === this.TagSelect.value.tagForm
-      });
-      }
-
-      // Verifica se a lista é vazia
-      if(lista.length === 0 ){
-        // lista vazia
-        this.vazio = true;
-        this.erro = "reclamação"
-      }
-      else{
-        // lista com conteudo
-        this.vazio = false;
-      }
-
-      //atualizando o valor do Observabale
-      this.reclamacaoSubject.next(lista);
+      tagForm: ['Todos']
     })
   }
 
+  ngOnInit(): void {
+    
+    this.user =
+    {
+      id: 2,
+      nome: 'Davy',
+      email: 'davy@gmail.com',
+      senha: 'davy',
+      endereco:{
+        cep: '17571802',
+        bairro : 'Jardim Europa',
+        logradouro : 'Rua Rock',
+        cidade : 'Votorantim'
+      }
+    }
+
+    this.thisIsUser(this.user);
+
+    this.TagSelect.valueChanges.subscribe(()=>{
+      console.log("Esta funcionando");
+    })
+    let lista : Reclamacao [];
+    lista = this.reclamacoes.filter((reclamacao) =>{
+      return (reclamacao.objUsuario.id === this.user?.id)
+    })
+    if(lista.length > 0 ){
+      this.vazio = false;
+      this.reclamacaoSubject.next(lista);
+    }
+    else{
+      this.vazio = true;
+      this.erro = "Nenhuma Reclamação encontrada";
+    }
+  }
+ private thisIsUser(user : IUser | null ) : void{
+    if(!user){
+      this.router.navigate(['']);
+    }
+  }
 }

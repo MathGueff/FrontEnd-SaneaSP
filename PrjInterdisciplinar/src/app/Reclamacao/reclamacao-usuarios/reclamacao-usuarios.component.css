@@ -1,0 +1,60 @@
+.borda{
+  border: 4px solid #aaaaaa;
+}
+.borda:focus{
+  border: 4px solid #aaaaaa;
+}
+.banner{
+  margin: 50px 50px;
+  padding: 0 50px;
+  background-color: #F0F0F0;
+  border-radius: 20px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+}
+.banner p{
+  text-align: justify;
+}
+.tags, .adicionar{
+  display: flex;
+  flex-direction: column;
+  align-content: space-between;
+  align-items: center;
+}
+.tags .pesquisa-tag, .adicionar .adicionar-btn {
+  display:  flex;
+  justify-content: center;
+  gap: 60px;
+  background-color: var(--cor-terciaria);
+  width: 60%;
+  align-items: center;
+}
+.titulo-reclamacao, .tag-reclamacao{
+  text-align: center;
+  width: 50%;
+}
+.adicionar-btn a{
+  width: 40%;
+  height: 46px;
+  font-size: var(--login-botao);
+  background-color: var(--cor-quaternaria);
+  color: #fff;
+  border: 2px solid var(--cor-quaternaria);
+  border-radius: 5px;
+  filter: drop-shadow(13px 1px 13px #575757);
+}
+.cards{
+  gap: 40px;
+  margin: 40px 20px 20px 20px;
+}
+.cards-item{
+  background-color: var(--cor-secundaria);
+  padding: 20px;
+  border-radius: 20px;
+  width: 70%;
+  cursor: pointer;
+  font-weight: 500;
+  font-size: 0.875rem;
+}

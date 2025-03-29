@@ -20,8 +20,24 @@
         <span>{{ link.nome }}</span>
       </a>
     </li>
+    }
+    @if (this.loginInfo$ | async) {
+      <li>
+        <a
+          routerLink="suas-reclamacoes"
+          routerLinkActive="link-navbar-ativo"
+          class="focus-secundario navbar-header-link d-flex justify-content-center align-items-center text-center"
+        >
+          <img
+            src="assets/icones/icon-search-reclamacao.svg"
+            alt="Ícone do link para página de Suas Reclamações"
+          />
+          <span>Suas Reclamações</span>
+        </a>
+      </li>
+    }
     <!-- Caso o usuário atual seja um admin, mostre o link para a página do administrador -->
-    } @if(this.adminInfo$ | async){
+     @if(this.adminInfo$ | async){
     <li>
       <a
         routerLink="pagina-admin"
@@ -78,15 +94,16 @@
             <a
               routerLink="{{ link.path }}"
               routerLinkActive="link-navbar-ativo"
-              class="focus-secundario navbar-header-link d-flex justify-content-center 
+              class="focus-secundario navbar-header-link d-flex justify-content-center
               align-items-center text-center w-50"
             >
               <img src="{{ link.img }}" alt="{{ link.alt }}" />
               <span>{{ link.nome }}</span>
             </a>
           </div>
+
           <!-- Caso o usuário atual seja um admin, mostre o link para a página do administrador -->
-          } @if(this.adminInfo$ | async){
+} @if(this.adminInfo$ | async){
           <div class="col-12 pb-4">
             <a
               routerLink="pagina-admin"
@@ -108,4 +125,6 @@
     <!-- Fechamento do corpo do offCanvas -->
   </div>
   <!-- Fim do Offcanvas -->
+
+  <!-- Links da navbar -->
 </nav>
