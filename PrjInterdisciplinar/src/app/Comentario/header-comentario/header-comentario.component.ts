@@ -68,8 +68,8 @@ export class HeaderComentarioComponent {
       descricaoComentario: "Obrigado pela ajuda, estamos resolvendo o problema",
       dataComentario: "2024-11-27",
       objAdmin: "admin",
-      objReclamacao: this.reclamacoes.indexOf(this.reclamacoes[0]),
-      objUsuario: this.users[i],
+      objReclamacao: this.reclamacoes[0],
+      objUsuario: this.users[0],
     },
   ];
 }
