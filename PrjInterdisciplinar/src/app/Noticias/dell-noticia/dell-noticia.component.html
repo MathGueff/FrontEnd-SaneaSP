@@ -1,0 +1,38 @@
+<div class="background">
+    <div class="container-fluid d-flex justify-content-center align-items-center flex-column">
+        <div class="form d-flex justify-content-center align-items-center flex-column m-3 p-4 rounded w-50">
+            <label for="id_noticia">Digite o ID da Notícia:</label>
+            <input type="text" id="id_noticia" class="form-control text-center w-25" #idNoticia required tabindex="0" alt="Digite o id da noticia">
+            <button type="submit" class="btn btn-primary" (click)="pesquisarId()" alt="pesquisar noticia">Pesquisar Notícia</button>
+            <div *ngIf="idEncontrado" class="w-75">
+                <div class="d-flex justify-content-center align-items-center flex-column">
+                    <label for="titulo_noticia" class="form-label">Título da Notícia:</label>
+                    <p id="titulo_noticia" class="form-control" readonly alt="Titulo da noticia" tabindex="0"></p>
+                </div>
+                <div class="d-flex justify-content-center align-items-center flex-column ">
+                    <label for="descricao_noticia" class="form-label">Descrição da Notícia:</label>
+                    <textarea name="description" id="descricao_noticia" min_cols="5" min_rows="5" readonly
+                        class="form-control" alt="Descricao da noticia" tabindex="0"></textarea>
+                </div>
+                <div class="d-flex justify-content-center align-items-center flex-column">
+                    <label for="imagem_noticia" class="form-label">Imagem da Noticia:</label>
+                    <img id="imagem_noticia" alt="Imagem da notícia" class="img-fluid form-control w-75 h-75"
+                    src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRF_ZR4hSLNE2VHh11GdsFsXnAOU7qOnkUcqg&s" tabindex="0">
+                </div>
+                <div class="d-flex justify-content-center align-items-center flex-column">
+                    <label for="tags_noticia" class="form-label">Tag's da Noticia:</label>
+                    <p id="tags_noticia" class="form-control" readonly alt="Tags da noticia" tabindex="0"></p>
+                </div>
+                <div class="d-flex justify-content-center align-items-center flex-column">
+                    <label for="fonte_noticia" class="form-label">Fonte da Noticia:</label>
+                    <p id="fonte_noticia" class="form-control" readonly alt="Fonte da noticia" tabindex="0"></p>
+                </div>
+                <div class="d-flex justify-content-center align-items-center flex-column">
+                    <label for="data_noticia" class="form-label">Data da Noticia:</label>
+                    <input type="date" id="data_noticia" class="form-control text-center" readonly alt="Data da noticia" tabindex="0">
+                    <button class="btn btn-primary" (click)="confirmarExclusao()" alt="Excluir noticia" tabindex="0">Excluir</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

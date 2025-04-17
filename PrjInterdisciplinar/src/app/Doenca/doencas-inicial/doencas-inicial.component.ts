@@ -22,7 +22,6 @@ import { DoencaService } from '../../Services/doenca.service';
 export class DoencasInicialComponent implements OnInit {
   private doencaService = inject(DoencaService)
   //variaveis para poder controlar o componente NotFound
-  //variaveis para poder controlar o componente NotFound
   protected vazio: boolean = true;
   erro: string = "doenças";
   //Observable Doenças

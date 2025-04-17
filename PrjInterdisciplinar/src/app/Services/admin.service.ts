@@ -8,8 +8,10 @@ import { Observable, of } from "rxjs";
 export class AdminService{
     admins : IAdmin[] = [
         {id: 1, userId : 1, nivel : 3},
-        {id: 2, userId : 3, nivel : 2},
-        {id: 3, userId : 5, nivel : 1}
+        {id: 2, userId : 2, nivel : 3},
+        {id: 3, userId : 3, nivel : 3},
+        {id: 4, userId : 4, nivel : 3},
+        {id: 5, userId : 5, nivel : 3},
     ]
 
     isAdmin(userId: number): Observable<IAdmin | null>{
