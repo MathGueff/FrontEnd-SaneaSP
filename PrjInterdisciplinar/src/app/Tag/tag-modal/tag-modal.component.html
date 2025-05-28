@@ -46,7 +46,7 @@
                 *ngIf="tagSelected" 
                 class="btn btn-primary focus-terciario me-2" 
                 id="botao-voltar-header" (click)="resetSearchForm()"> 
-                  <img src="assets/icones/operacoes/white/voltar_icon.svg" alt="">
+                  <img src="assets/icones/operacoes/white/return_icon.svg" alt="">
               </button>
               <span
                 >{{modalTypeSelected == modalTypes.Edicao ? 'Editando' : 'Excluindo'}} 
@@ -60,9 +60,9 @@
                   [formGroup]="formPesquisaTag"
                   formName="form-pesquisa-tag"
                   controlName="nomePesquisaTag"
-                  icon="assets/icones/black/tag_icon.svg"
+                  icon="assets/icones/operacoes/black/search_icon.svg"
                   label="Pesquise pelo nome da tag:"
-                  placeholder="Digite o nome da tag"
+                  placeholder="Digite o nome da tag:"
                   fieldType="input"
                   (input)="onInputTag()"
                   [required]="true"
@@ -80,7 +80,7 @@
                       src="assets/icones/black/info_icon.svg"
                       alt="ícone de informação"
                     />
-                    <span>Digite o nome da tag e selecione para começar a editar</span>
+                    <span>Filtre pelo nome e selecione abaixo para começar a editar</span>
                   </div>
                 }
                   
@@ -223,7 +223,7 @@
             id="botao-voltar-footer"
             (click)="resetSearchForm()"
           >
-            <img class="btn-icon" src="assets/icones/operacoes/black/voltar_icon.svg" alt="Ícone de voltar">
+            <img class="btn-icon" src="assets/icones/operacoes/black/return_icon.svg" alt="Ícone de voltar">
             Voltar
           </button>
           <button

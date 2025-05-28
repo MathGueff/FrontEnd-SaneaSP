@@ -6,11 +6,12 @@ import { TagModalComponent } from '../tag-modal/tag-modal.component';
 import { ITag } from '../../models/interface/ITag.model';
 import { Observable, of } from 'rxjs';
 import { IResponseList } from '../../models/interface/IResponseList.model';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-update-tag',
   standalone: true,
-  imports: [CommonModule, TagModalComponent],
+  imports: [CommonModule, TagModalComponent, RouterModule],
   templateUrl: './tag-tabela.component.html',
   styleUrl: './tag-tabela.component.css'
 })

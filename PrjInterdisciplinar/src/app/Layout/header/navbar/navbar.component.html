@@ -103,8 +103,24 @@
           </div>
 
           <!-- Caso o usuário atual seja um admin, mostre o link para a página do administrador -->
-          } @if(this.adminInfo$ | async){
-          <div class="col-12 pb-4">
+          }
+          @if(this.loginInfo$ | async){
+            <div class="col-12 d-flex justify-content-center align-items-center">
+            <a
+              routerLink="suas-reclamacoes"
+              routerLinkActive="link-navbar-ativo"
+              class="focus-secundario navbar-header-link d-flex justify-content-center align-items-center text-center"
+            >
+              <img
+                src="assets/icones/white/search-reclamacao_icon.svg"
+                alt="Ícone do link para página de Suas reclamações"
+              />
+              <span>Suas Reclamações</span>
+            </a>
+          </div>
+          }
+          @if(this.adminInfo$ | async){
+          <div class="col-12 pb-4 d-flex justify-content-center align-items-center">
             <a
               routerLink="pagina-admin"
               routerLinkActive="link-navbar-ativo"
