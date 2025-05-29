@@ -1,47 +1,50 @@
 <div class="background d-flex">
   @if(!vazio){
-    <div
-      *ngIf="dado$ | async as Detalhes"
-      class="painel m-5 details justifica rounded overflow-hidden"
-    >
-      <div class="header-painel p-5 d-flex flex-line gap-5">
-        <img
-          id="imgDoenca"
-          class="me-3"
-          src="{{ Detalhes.imgDoenca }}"
-          alt="DoencaFoto.png"
-        />
-        <div>
-          <h2 id="titulo">{{ Detalhes.title }}</h2>
-          <h5>Transmissão:</h5>
-          <span>
-            {{ Detalhes.transmission }}
-          </span>
-        </div>
-      </div>
-      <div class="info p-5">
-        <h5>Tratamento:</h5>
-        <span>
-          {{ Detalhes.treatment }}
-        </span>
-      </div>
-      <div class="info p-5">
-        <h5>Sintomas:</h5>
-        <ul>
-          <div *ngFor="let symptoms of Detalhes.symotomsName">
-            <li>
-              <p>{{ symptoms }}</p>
-            </li>
+    @if (dado$ | async; as Detalhes) {
+      <div
+        class="painel m-5 details justifica rounded overflow-hidden"
+        >
+        <div class="header-painel p-5 d-flex flex-line gap-5">
+          <img
+            id="imgDoenca"
+            class="me-3"
+            src="{{ Detalhes.imgDoenca }}"
+            alt="DoencaFoto.png"
+            />
+            <div>
+              <h2 id="titulo">{{ Detalhes.title }}</h2>
+              <h5>Transmissão:</h5>
+              <span>
+                {{ Detalhes.transmission }}
+              </span>
+            </div>
           </div>
-        </ul>
-      </div>
-      <div class="d-flex p-5 justify-content-between align-items-center">
-        <a href="{{ Detalhes.source }}">{{ Detalhes.source }}</a>
-        <a class="btn btn-primary" routerLink="/doenca-inicial">Voltar </a>
-      </div>
-    </div>
-  }
-  @else {
+          <div class="info p-5">
+            <h5>Tratamento:</h5>
+            <span>
+              {{ Detalhes.treatment }}
+            </span>
+          </div>
+          <div class="info p-5">
+            <h5>Sintomas:</h5>
+            <ul>
+              @for (symptoms of Detalhes.symotomsName; track symptoms) {
+                <div>
+                  <li>
+                    <p>{{ symptoms }}</p>
+                  </li>
+                </div>
+              }
+            </ul>
+          </div>
+          <div class="d-flex p-5 justify-content-between align-items-center">
+            <a href="{{ Detalhes.source }}">{{ Detalhes.source }}</a>
+            <a class="btn btn-primary" routerLink="/doenca-inicial">Voltar </a>
+          </div>
+        </div>
+      }
+    }
+    @else {
     <div class="erro m-auto my-3">
       <app-not-found [mensageError]="erro" [caminhoVoltar]="caminhoVoltar"></app-not-found>
     </div>

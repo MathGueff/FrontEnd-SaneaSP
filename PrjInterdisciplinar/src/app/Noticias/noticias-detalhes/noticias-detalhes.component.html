@@ -1,32 +1,33 @@
 <div class="background d-flex">
   @if (!vazio) {
-    <div
-      *ngIf="dado$ | async as Detalhes"
-      class="painel m-5 details justifica rounded overflow-hidden"
-    >
-      <div class="header-painel p-5 d-flex flex-line gap-5">
-        <img
-          id="imgDoenca"
-          class="me-3"
-          src="{{ Detalhes.imagem_noticia }}"
-          alt="DoencaFoto.png"
-        />
-        <div>
-          <h3 id="titulo">{{ Detalhes.titulo }}</h3>
+    @if (dado$ | async; as Detalhes) {
+      <div
+        class="painel m-5 details justifica rounded overflow-hidden"
+        >
+        <div class="header-painel p-5 d-flex flex-line gap-5">
+          <img
+            id="imgDoenca"
+            class="me-3"
+            src="{{ Detalhes.imagem_noticia }}"
+            alt="DoencaFoto.png"
+            />
+            <div>
+              <h3 id="titulo">{{ Detalhes.titulo }}</h3>
+            </div>
+          </div>
+          <div class="info p-5">
+            <span>
+              {{ Detalhes.descricao }}
+            </span>
+          </div>
+          <div class="d-flex p-5 justify-content-between align-items-center">
+            <a href="{{ Detalhes.fontes_noticia }}">{{ Detalhes.fontes_noticia }}</a>
+            <a class="btn btn-primary" routerLink="/noticia-inicial">Voltar </a>
+          </div>
         </div>
-      </div>
-      <div class="info p-5">
-        <span>
-          {{ Detalhes.descricao }}
-        </span>
-      </div>
-      <div class="d-flex p-5 justify-content-between align-items-center">
-        <a href="{{ Detalhes.fontes_noticia }}">{{ Detalhes.fontes_noticia }}</a>
-        <a class="btn btn-primary" routerLink="/noticia-inicial">Voltar </a>
-      </div>
-    </div>
-  }
-  @else {
+      }
+    }
+    @else {
     <div class="erro m-auto my-3">
       <app-not-found [mensageError]="erro" [caminhoVoltar]="caminhoVoltar"></app-not-found>
     </div>

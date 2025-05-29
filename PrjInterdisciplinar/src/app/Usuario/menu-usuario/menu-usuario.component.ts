@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
+
 import { MenuUsuario } from '../../models/class/menu-usuario';
 import { RouterLink, Router} from '@angular/router';
 
 @Component({
     selector: 'app-menu-usuario',
-    imports: [CommonModule, RouterLink],
+    imports: [RouterLink],
     templateUrl: './menu-usuario.component.html',
     styleUrl: './menu-usuario.component.css'
 })

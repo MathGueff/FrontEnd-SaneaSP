@@ -2,30 +2,32 @@
   <!-- background -->
   <div
     class="container-fluid d-flex justify-content-center align-items-center flex-column"
-  >
+    >
     <!-- Div do container-->
     <!-- Formulário de Cadastro -->
     <form
       [formGroup]="formDoenca"
       class="form d-flex justify-content-center align-items-center flex-column m-3 p-4 rounded"
-    >
+      >
       <h3 class="mb-4">Cadastre uma nova doença</h3>
       <!-- Campos do formulário -->
       <div class="row mt-3">
-        <div class="col-md-12 col-sm-12 mb-3" *ngFor="let input of inputs">
-          <app-form-field
-            [formGroup]="this.formDoenca"
-            formName="form-doenca"
-            controlName="{{ input.controlName }}"
-            icon="{{ input.icon }}"
-            label="{{ input.label }}"
-            placeholder="{{ input.placeholder }}"
-            [required]="input.required || false"
-            [validators]="input.validators || []"
-            [fieldType]="input.typeField || ''"
-          >
-          </app-form-field>
-        </div>
+        @for (input of inputs; track input) {
+          <div class="col-md-12 col-sm-12 mb-3">
+            <app-form-field
+              [formGroup]="this.formDoenca"
+              formName="form-doenca"
+              controlName="{{ input.controlName }}"
+              icon="{{ input.icon }}"
+              label="{{ input.label }}"
+              placeholder="{{ input.placeholder }}"
+              [required]="input.required || false"
+              [validators]="input.validators || []"
+              [fieldType]="input.typeField || ''"
+              >
+            </app-form-field>
+          </div>
+        }
 
         <!-- Input de adicionar sintoma -->
         <app-form-field
@@ -41,17 +43,17 @@
         ></app-form-field>
 
         <app-form-field
-        [formGroup]="this.formDoenca"
-        class="col-md-6 col-12"
-        formName="form-noticia"
-        controlName="sintoma_select"
-        icon="assets/icones/black/doenca_icon.svg"
-        label="Selecione um Sintoma:"
-        [required]="false"
-        fieldType="select"
-        [selectList]="['sintoma1', 'sintoma2']"
-        (keydown.enter)="onEnter($event, 'sintoma-select')"
-        (change)="onEnter($event, 'sintoma-select')"
+          [formGroup]="this.formDoenca"
+          class="col-md-6 col-12"
+          formName="form-noticia"
+          controlName="sintoma_select"
+          icon="assets/icones/black/doenca_icon.svg"
+          label="Selecione um Sintoma:"
+          [required]="false"
+          fieldType="select"
+          [selectList]="['sintoma1', 'sintoma2']"
+          (keydown.enter)="onEnter($event, 'sintoma-select')"
+          (change)="onEnter($event, 'sintoma-select')"
         ></app-form-field>
 
         <!-- Caso o usuário não tenha digitado o sintoma -->
@@ -80,21 +82,22 @@
               <img src="assets/icones/black/doenca_icon.svg" class="label-icon">
               {{
               sintomas.length > 0
-                ? "Sintomas adicionados:"
-                : "Adicione sintomas:"
+              ? "Sintomas adicionados:"
+              : "Adicione sintomas:"
             }}</label>
             <span class="required-control"> *</span>
             <ul>
-              <li
-                class="valor_adicionado"
-                *ngFor="let sintoma of sintomas"
-                (click)="removeSintoma(sintoma)"
-                data-bs-toggle="tooltip"
-                data-bs-placement="top"
-                title="Remover {{ sintoma }}"
-              >
-                {{ sintoma }}
-              </li>
+              @for (sintoma of sintomas; track sintoma) {
+                <li
+                  class="valor_adicionado"
+                  (click)="removeSintoma(sintoma)"
+                  data-bs-toggle="tooltip"
+                  data-bs-placement="top"
+                  title="Remover {{ sintoma }}"
+                  >
+                  {{ sintoma }}
+                </li>
+              }
             </ul>
           </div>
         </div>
@@ -138,16 +141,17 @@
               {{fontes.length > 0 ? "Fontes adicionadas:" : "Adicione fontes:"}}
             </label>
             <ul>
-              <li
-                class="valor_adicionado"
-                *ngFor="let fonte of fontes"
-                (click)="removeFonte(fonte)"
-                data-bs-toggle="tooltip"
-                data-bs-placement="top"
-                title="Remover fonte"
-              >
-                {{ fonte }}
-              </li>
+              @for (fonte of fontes; track fonte) {
+                <li
+                  class="valor_adicionado"
+                  (click)="removeFonte(fonte)"
+                  data-bs-toggle="tooltip"
+                  data-bs-placement="top"
+                  title="Remover fonte"
+                  >
+                  {{ fonte }}
+                </li>
+              }
             </ul>
           </div>
         </div>
@@ -156,63 +160,64 @@
           <img
             class="form-icon me-1"
             src="img/paginas/reclamacoes/image-icon.svg"
-          />
-          <label for="imagem-doenca" class="form-label">Imagem:</label>
-          <input
-            formControlName="imagem"
-            type="file"
-            class="form-control"
-            id="imagem-doenca"
-            name="imagem-doenca"
-            (change)="setPreview($event)"
-          />
-        </div>
-
-        <div class="col-md-12 col-sm-12 mb-3">
-          <div class="preview d-flex flex-column align-items-center">
-            <label class="form-label">Pré-visualização</label>
-            <img
-              class="preview_img img-fluid"
-              (click)="removePreview()"
-              [src]="src"
-              id="imgPreview"
-              *ngIf="src"
             />
+            <label for="imagem-doenca" class="form-label">Imagem:</label>
+            <input
+              formControlName="imagem"
+              type="file"
+              class="form-control"
+              id="imagem-doenca"
+              name="imagem-doenca"
+              (change)="setPreview($event)"
+              />
+            </div>
+
+            <div class="col-md-12 col-sm-12 mb-3">
+              <div class="preview d-flex flex-column align-items-center">
+                <label class="form-label">Pré-visualização</label>
+                @if (src) {
+                  <img
+                    class="preview_img img-fluid"
+                    (click)="removePreview()"
+                    [src]="src"
+                    id="imgPreview"
+                    />
+                }
+              </div>
+            </div>
           </div>
-        </div>
+          <!-- Fim dos campos -->
+
+          <div class="justify-content-center">
+            <!-- Caso algum dos controls esteja inválido -->
+            <app-check-error
+              [enum]="this.doencaErrorStatus"
+              error="invalid-control"
+              message="Campos não preenchidos corretamente"
+            ></app-check-error>
+
+            <!-- Caso já exista um usuário -->
+            <app-check-error
+              [enum]="this.doencaErrorStatus"
+              error="invalid-name"
+              message="Uma doença com esse nome já foi cadastrada"
+            ></app-check-error>
+          </div>
+
+          <div
+            class="d-flex gap-2 flex-wrap-reverse justify-content-center align-items-center"
+            >
+            <!-- Botão de voltar -->
+            <button class="mt-3 form-btn" routerLink="/pagina-admin">
+              VOLTAR
+            </button>
+
+            <!-- Botão de entrar -->
+            <button class="mt-3 form-btn" type="submit" (click)="onSubmit()">
+              CADASTRAR
+            </button>
+          </div>
+        </form>
+        <!-- Fim do formulário -->
       </div>
-      <!-- Fim dos campos -->
-
-      <div class="justify-content-center">
-        <!-- Caso algum dos controls esteja inválido -->
-        <app-check-error
-          [enum]="this.doencaErrorStatus"
-          error="invalid-control"
-          message="Campos não preenchidos corretamente"
-        ></app-check-error>
-
-        <!-- Caso já exista um usuário -->
-        <app-check-error
-          [enum]="this.doencaErrorStatus"
-          error="invalid-name"
-          message="Uma doença com esse nome já foi cadastrada"
-        ></app-check-error>
-      </div>
-
-      <div
-        class="d-flex gap-2 flex-wrap-reverse justify-content-center align-items-center"
-      >
-        <!-- Botão de voltar -->
-        <button class="mt-3 form-btn" routerLink="/pagina-admin">
-          VOLTAR
-        </button>
-
-        <!-- Botão de entrar -->
-        <button class="mt-3 form-btn" type="submit" (click)="onSubmit()">
-          CADASTRAR
-        </button>
-      </div>
-    </form>
-    <!-- Fim do formulário -->
-  </div>
-</div>
+    </div>

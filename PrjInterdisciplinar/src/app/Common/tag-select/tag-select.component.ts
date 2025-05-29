@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+
 import { Component } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { ITag } from '../../models/interface/ITag.model';
@@ -6,7 +6,7 @@ import { ITag } from '../../models/interface/ITag.model';
 
 @Component({
     selector: 'app-tag-select',
-    imports: [CommonModule, ReactiveFormsModule],
+    imports: [ReactiveFormsModule],
     templateUrl: './tag-select.component.html',
     styleUrl: './tag-select.component.css'
 })

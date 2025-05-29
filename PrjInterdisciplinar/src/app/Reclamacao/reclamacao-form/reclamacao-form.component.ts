@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+
 import { Component, inject, OnInit } from '@angular/core';
 import {
   NonNullableFormBuilder,
@@ -10,7 +10,7 @@ import { ViacepService } from '../../Services/viacep.service';
 
 @Component({
     selector: 'app-reclamacao-form',
-    imports: [ReactiveFormsModule, CommonModule, RouterLink],
+    imports: [ReactiveFormsModule, RouterLink],
     templateUrl: './reclamacao-form.component.html',
     styleUrl: './reclamacao-form.component.css'
 })

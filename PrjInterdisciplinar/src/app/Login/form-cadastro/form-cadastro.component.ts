@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+
 import { Component, inject, OnInit } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import { NonNullableFormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
@@ -13,7 +13,7 @@ import { FormValidatorEnum } from '../../models/enums/FormValidatorEnum.enum';
 
 @Component({
     selector: 'app-form-cadastro',
-    imports: [RouterLink, CommonModule, ReactiveFormsModule, FormFieldComponent],
+    imports: [RouterLink, ReactiveFormsModule, FormFieldComponent],
     templateUrl: './form-cadastro.component.html',
     styleUrls: ['./form-cadastro.component.css', '../links-redes.css']
 })

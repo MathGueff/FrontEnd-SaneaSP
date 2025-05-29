@@ -1,9 +1,9 @@
-import { CommonModule } from '@angular/common';
+
 import { Component, Input } from '@angular/core';
 
 @Component({
     selector: 'app-check-error',
-    imports: [CommonModule],
+    imports: [],
     templateUrl: './check-error.component.html',
     styleUrl: './check-error.component.css'
 })

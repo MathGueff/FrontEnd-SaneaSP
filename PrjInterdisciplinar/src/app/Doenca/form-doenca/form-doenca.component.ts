@@ -1,5 +1,5 @@
 import { DoencaErrorStatus } from '../../models/enums/DoencaErrorStatus.enum';
-import { CommonModule } from '@angular/common';
+
 import { Component, inject, Input } from '@angular/core';
 import { FormControl, NonNullableFormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { IDoenca } from '../../models/interface/IDoencas.model';
@@ -13,7 +13,7 @@ import { FormValidatorEnum } from '../../models/enums/FormValidatorEnum.enum';
 
 @Component({
     selector: 'app-form-doenca',
-    imports: [CommonModule, ReactiveFormsModule, RouterModule, FormFieldComponent, CheckErrorComponent],
+    imports: [ReactiveFormsModule, RouterModule, FormFieldComponent, CheckErrorComponent],
     templateUrl: './form-doenca.component.html',
     styleUrl: './form-doenca.component.css'
 })

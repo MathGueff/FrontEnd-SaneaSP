@@ -1,9 +1,11 @@
 <div class="toast-container">
-    <div *ngFor="let toast of toastService.toasts" 
-       [ngClass]="toast.error ? 'toast-error' : 'toast-success'"
-       (click)="toastService.remove(toast)"
-       class="toast d-flex justify-content-start align-items-center ps-3 pt-2 pb-2 pe-2 gap-3 mt-2 mb-2">
-    <img src="{{toast.iconUrl}}" alt="Ícone">
-    {{ toast.message }}
-  </div>
+  @for (toast of toastService.toasts; track toast) {
+    <div
+      [ngClass]="toast.error ? 'toast-error' : 'toast-success'"
+      (click)="toastService.remove(toast)"
+      class="toast d-flex justify-content-start align-items-center ps-3 pt-2 pb-2 pe-2 gap-3 mt-2 mb-2">
+      <img src="{{toast.iconUrl}}" alt="Ícone">
+      {{ toast.message }}
+    </div>
+  }
 </div>

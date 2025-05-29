@@ -7,27 +7,27 @@
           class="img-fluid"
           src="img/paginas/doencas/pessoa_doente.svg"
           alt="banner reclamacao"
-        />
+          />
+        </div>
+        <div class="col-8">
+          <p>
+            O saneamento básico é crucial para a saúde pública, prevenindo doenças
+            e promovendo o bem-estar. O acesso a água potável, esgoto tratado e
+            manejo correto de resíduos sólidos reduz a contaminação ambiental e a
+            exposição a agentes patogênicos. Proteja sua saúde e o meio ambiente com
+            os cuidados necessários!
+          </p>
+        </div>
       </div>
-      <div class="col-8">
-        <p>
-          O saneamento básico é crucial para a saúde pública, prevenindo doenças
-          e promovendo o bem-estar. O acesso a água potável, esgoto tratado e
-          manejo correto de resíduos sólidos reduz a contaminação ambiental e a
-          exposição a agentes patogênicos. Proteja sua saúde e o meio ambiente com
-          os cuidados necessários!
-        </p>
-      </div>
-    </div>
-    <!-- Banner -->
-    <div class="row d-flex justify-content-center">
-      <!-- Titulo -->
-      <div class="col-12 d-flex flex-line justify-content-center align-items-center text-center">
-        <h2>Doenças relacionas ao saneamento básico:</h2>
-      </div>
-      <!-- Titulo -->
-      <!-- Filtro -->
-      <!-- <div class="row mb-5">
+      <!-- Banner -->
+      <div class="row d-flex justify-content-center">
+        <!-- Titulo -->
+        <div class="col-12 d-flex flex-line justify-content-center align-items-center text-center">
+          <h2>Doenças relacionas ao saneamento básico:</h2>
+        </div>
+        <!-- Titulo -->
+        <!-- Filtro -->
+        <!-- <div class="row mb-5">
         <div class="col tags">
           <h2 class="mb-4">Filtre pela Tag</h2>
           <form class="pesquisa-tag p-4" [formGroup]="TagSelect">
@@ -50,11 +50,13 @@
     </div>
     <div class="row my-4 cards-div d-flex justify-content-center align-items-center"> <!-- Row onde ficam os cards -->
       @if(!vazio) { <!-- verificando se a lista é vazia -->
-        <div class="col-12 p-4 px-5" *ngFor="let doenca of doencas"> <!-- Coluna do card-->
-          <app-doenca-card [cardDoenca]="doenca"></app-doenca-card>
-        </div> <!-- Fim da Coluna do card -->
-      }
-      @else {
+        @for (doenca of doencas; track doenca) {
+          <div class="col-12 p-4 px-5"> <!-- Coluna do card-->
+            <app-doenca-card [cardDoenca]="doenca"></app-doenca-card>
+          </div>
+          } <!-- Fim da Coluna do card -->
+        }
+        @else {
         <div class="erro m-auto my-3">
           <app-not-found [mensageError]="erro"></app-not-found>
         </div>
@@ -64,12 +66,12 @@
     <!-- Card antigo de doença -->
     <!-- <div class="row gap-5" *ngFor="let doenca of doencas">
 
-      <div class="col-10 row card d-flex flex-line overflow-hidden">
-        <img
-          class="col-2"
-          src="{{ doenca.image }}"
-          alt="amebiase.jpg"
-          id="amebiase-img"
+    <div class="col-10 row card d-flex flex-line overflow-hidden">
+      <img
+        class="col-2"
+        src="{{ doenca.image }}"
+        alt="amebiase.jpg"
+        id="amebiase-img"
         />
         <div class="col-10 d-flex flex-column">
           <h5>{{ doenca.title }}</h5>

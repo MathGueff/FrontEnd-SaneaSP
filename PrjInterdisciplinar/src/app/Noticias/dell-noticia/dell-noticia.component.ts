@@ -1,10 +1,10 @@
 import { Component, viewChild, inject } from '@angular/core';
-import { CommonModule } from '@angular/common';
+
 import { SweetAlertService } from '../../Services/sweetAlert.service';
 
 @Component({
     selector: 'app-dell-noticia',
-    imports: [CommonModule],
+    imports: [],
     templateUrl: './dell-noticia.component.html',
     styleUrl: './dell-noticia.component.css'
 })

@@ -6,80 +6,82 @@
           class="img-fluid"
           src="img/paginas/reclamacoes/reclamacao.svg"
           alt="banner reclamacao"
-        />
+          />
+        </div>
+        <div class="col-8">
+          <p>
+            Denunciar e fazer reclamações sobre problemas de esgoto e água é
+            essencial para garantir a saúde pública, prevenir doenças e proteger o
+            meio ambiente. Ao relatar esses problemas, ajudamos a incentivar as
+            autoridades para que realizem as devidas manutenções e reparos,
+            garantindo um saneamento básico adequado. Além disso, ações corretivas
+            evitam a contaminação de rios e mares, preservando os recursos
+            hídricos para as futuras gerações.
+          </p>
+        </div>
       </div>
-      <div class="col-8">
-        <p>
-          Denunciar e fazer reclamações sobre problemas de esgoto e água é
-          essencial para garantir a saúde pública, prevenir doenças e proteger o
-          meio ambiente. Ao relatar esses problemas, ajudamos a incentivar as
-          autoridades para que realizem as devidas manutenções e reparos,
-          garantindo um saneamento básico adequado. Além disso, ações corretivas
-          evitam a contaminação de rios e mares, preservando os recursos
-          hídricos para as futuras gerações.
-        </p>
-      </div>
-    </div>
-    <!-- banner -->
-    <div class="row mb-5">
-      <div class="col tags">
-        <h2 class="mb-4">Filtre pela Tag</h2>
-        <form class="pesquisa-tag p-4" [formGroup]="TagSelect">
-          <div class="tag-reclamacao">
-            <input
-              list="box"
-              type="search"
-              class="form-select text-center borda"
-              formControlName="tagForm"
-            />
-            <datalist id="box">
-              <option selected>Todos</option>
-              <option>Abastecimento</option>
-              <option>Esgoto</option>
-              <option>Lixo</option>
-              <option>Qualidade da Água</option>
-            </datalist>
-          </div>
-        </form>
-        <!-- <app-tag-select></app-tag-select> -->
-      </div>
-    </div>
-    @if(this.usuarioAtivo$ | async){
-      <!-- row tag  -->
+      <!-- banner -->
       <div class="row mb-5">
-        <div class="col text-center adicionar">
-          <h2 class="mb-4">Adicione sua reclamação</h2>
-          <div class="adicionar-btn py-3">
-            <a routerLink="reclamacao-form" class="btn btn-secondary"
-              >Adicionar</a
-            >
+        <div class="col tags">
+          <h2 class="mb-4">Filtre pela Tag</h2>
+          <form class="pesquisa-tag p-4" [formGroup]="TagSelect">
+            <div class="tag-reclamacao">
+              <input
+                list="box"
+                type="search"
+                class="form-select text-center borda"
+                formControlName="tagForm"
+                />
+                <datalist id="box">
+                  <option selected>Todos</option>
+                  <option>Abastecimento</option>
+                  <option>Esgoto</option>
+                  <option>Lixo</option>
+                  <option>Qualidade da Água</option>
+                </datalist>
+              </div>
+            </form>
+            <!-- <app-tag-select></app-tag-select> -->
           </div>
         </div>
-      </div>
-    }
-    
-    <!-- row adicionar reclamação -->
-    <div class="row mt-4 mb-4 cards-div">
-      <!-- Row onde ficam os cards -->
-      @if (!vazio) { <!-- Verifica se tem valor na lista -->
-        @if (data$ | async) {
-          <!-- verificando se houve atualização da lista -->
-          <div class="col-12 p-4 ps-5 pe-5" *ngFor="let reclamacao of data$ | async">
-            <!-- Coluna do card-->
-            <app-reclamacao-card [card]="reclamacao"></app-reclamacao-card>
-          </div>
-          <!-- Fim da Coluna do card -->
-        }
-      }
-      @else {
-        <div class="col m-5">
-          <app-not-found [mensageError] = "erro"></app-not-found>
-        </div>
-      }
+        @if(this.usuarioAtivo$ | async){
+          <!-- row tag  -->
+          <div class="row mb-5">
+            <div class="col text-center adicionar">
+              <h2 class="mb-4">Adicione sua reclamação</h2>
+              <div class="adicionar-btn py-3">
+                <a routerLink="reclamacao-form" class="btn btn-secondary"
+                  >Adicionar</a
+                  >
+                </div>
+              </div>
+            </div>
+          }
 
+          <!-- row adicionar reclamação -->
+          <div class="row mt-4 mb-4 cards-div">
+            <!-- Row onde ficam os cards -->
+            @if (!vazio) { <!-- Verifica se tem valor na lista -->
+              @if (data$ | async) {
+                <!-- verificando se houve atualização da lista -->
+                @for (reclamacao of data$ | async; track reclamacao) {
+                  <div class="col-12 p-4 ps-5 pe-5">
+                    <!-- Coluna do card-->
+                    <app-reclamacao-card [card]="reclamacao"></app-reclamacao-card>
+                  </div>
+                }
+                <!-- Fim da Coluna do card -->
+              }
+            }
+            @else {
+            <div class="col m-5">
+              <app-not-found [mensageError] = "erro"></app-not-found>
+            </div>
+          }
+
+        </div>
+        <!-- Fim do row dos cards -->
+      </div>
+      <!-- Fim container-fluid -->
     </div>
-    <!-- Fim do row dos cards -->
-  </div>
-  <!-- Fim container-fluid -->
-</div>
 

@@ -1,39 +1,40 @@
 <div class="background d-flex">
   <!-- Verifica se encontrou a reclamação -->
   @if (!vazio) {
-    <div *ngIf="dado$ | async as reclamacao" class="painel m-5 justifica rounded">
-      <div class="header-painel p-3 mb-3 d-flex flex-line gap-5">
-        <img
-          class="imgPainel"
-          src="{{ reclamacao.objImagem }}"
-          alt="imagem da reclamação"
-        />
-        <div>
-          <h2>{{ reclamacao.tituloReclamao }}</h2>
-          <span>
-            {{ reclamacao.dataReclamacao }}
-          </span>
-        </div>
+    @if (dado$ | async; as reclamacao) {
+      <div class="painel m-5 justifica rounded">
+        <div class="header-painel p-3 mb-3 d-flex flex-line gap-5">
+          <img
+            class="imgPainel"
+            src="{{ reclamacao.objImagem }}"
+            alt="imagem da reclamação"
+            />
+            <div>
+              <h2>{{ reclamacao.tituloReclamao }}</h2>
+              <span>
+                {{ reclamacao.dataReclamacao }}
+              </span>
+            </div>
+          </div>
+          <div class="info pb-3 my-3 ms-3 me-4">
+            <p class="paragraf-painel">
+              {{ reclamacao.descricaoReclamacao }}
+            </p>
+          </div>
+          <div class="d-flex justify-content-between my-3 ms-3 me-4">
+            <a class="btn btn-primary" routerLink="{{caminhoVoltar}}">Voltar</a>
+            <a
+              class="btn btn-primary"
+              routerLink="/comentario/{{ reclamacao.idReclamacao }}"
+              >Ir para Comentários</a
+              >
+            </div>
+          </div>
+        }
+      }
+      @else {
+      <div class="erro my-5 m-auto">
+        <app-not-found [mensageError]="erro" [caminhoVoltar]="caminhoVoltar"></app-not-found>
       </div>
-      <div class="info pb-3 my-3 ms-3 me-4">
-        <p class="paragraf-painel">
-          {{ reclamacao.descricaoReclamacao }}
-        </p>
-      </div>
-
-      <div class="d-flex justify-content-between my-3 ms-3 me-4">
-        <a class="btn btn-primary" routerLink="{{caminhoVoltar}}">Voltar</a>
-        <a
-          class="btn btn-primary"
-          routerLink="/comentario/{{ reclamacao.idReclamacao }}"
-          >Ir para Comentários</a
-        >
-      </div>
-    </div>
-  }
-  @else {
-    <div class="erro my-5 m-auto">
-      <app-not-found [mensageError]="erro" [caminhoVoltar]="caminhoVoltar"></app-not-found>
-    </div>
-  }
-</div>
+    }
+  </div>

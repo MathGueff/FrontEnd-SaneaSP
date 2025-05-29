@@ -1,5 +1,5 @@
 import { Component, ElementRef, HostListener, ViewChild } from '@angular/core';
-import { CommonModule } from '@angular/common';
+
 import { RouterLink } from '@angular/router';
 import { Router } from '@angular/router';
 import { AdminSidebarOptions} from '../../models/enums/AdminSidebarOptions';
@@ -9,7 +9,7 @@ import { ILinkPanelAdmin, ILinkSidebarAdmin } from '../../models/interface/ILink
 
 @Component({
     selector: 'app-menu-admin',
-    imports: [CommonModule, RouterLink, TagModalComponent],
+    imports: [RouterLink, TagModalComponent],
     templateUrl: './menu-admin.component.html',
     styleUrl: './menu-admin.component.css'
 })

@@ -7,59 +7,61 @@
           class="img-fluid"
           src="img/paginas/noticias/noticia.svg"
           alt="banner reclamacao"
-        />
-      </div>
-      <div class="col-8">
-        <p>
-          Acompanhar notícias sobre água potável e saneamento é essencial para manter-se informado sobre a qualidade e disponibilidade dos recursos hídricos, além de medidas preventivas contra doenças. Conhecer atualizações e políticas públicas nessa área ajuda a promover a saúde pública e a sustentabilidade ambiental.
-        </p>
-      </div>
-    </div>
-    <!-- Banner -->
-    <div class="row d-flex justify-content-center">
-      <!-- Titulo -->
-      <div class="col-12 d-flex flex-line justify-content-center align-items-center text-center">
-        <h2>Noticias relacionas ao saneamento básico:</h2>
-      </div>
-      <!-- Titulo -->
-      <!-- Filtro -->
-      <div class="row mb-5">
-        <div class="col tags">
-          <h2 class="mb-4">Filtre pela Tag</h2>
-          <form class="pesquisa-tag p-4" [formGroup]="TagSelect">
-            <div class="tag-reclamacao">
-              <input list="box" type="search" class="form-select text-center borda"
-              formControlName="tagForm">
-              <datalist id="box">
-                <option selected>Todos</option>
-                <option>Poluição</option>
-                <option>Saneamento</option>
-                <option>Infraestrutura</option>
-                <option>Inovação</option>
-                <option>Denúncia</option>
-                <option>Nenhum</option>
-              </datalist>
-            </div>
-          </form>
+          />
+        </div>
+        <div class="col-8">
+          <p>
+            Acompanhar notícias sobre água potável e saneamento é essencial para manter-se informado sobre a qualidade e disponibilidade dos recursos hídricos, além de medidas preventivas contra doenças. Conhecer atualizações e políticas públicas nessa área ajuda a promover a saúde pública e a sustentabilidade ambiental.
+          </p>
         </div>
       </div>
-  <!-- Card -->
-  <div
-    class="row my-4 cards-div d-flex justify-content-center align-items-center"
-  >
-    <!-- Row onde ficam os cards -->
-    @if (!vazio) {
-    <!-- verificando se a lista é vazia -->
-    <div class="col-12 p-4 px-5" *ngFor="let noticia of data$ | async">
-      <!-- Coluna do card-->
-      <app-noticias-card [cardNoticia]="noticia"></app-noticias-card>
-    </div>
-    <!-- Fim da Coluna do card -->
-    }
-    @else {
-      <div class="erro m-auto my-3">
-        <app-not-found [mensageError]="erro"></app-not-found>
+      <!-- Banner -->
+      <div class="row d-flex justify-content-center">
+        <!-- Titulo -->
+        <div class="col-12 d-flex flex-line justify-content-center align-items-center text-center">
+          <h2>Noticias relacionas ao saneamento básico:</h2>
+        </div>
+        <!-- Titulo -->
+        <!-- Filtro -->
+        <div class="row mb-5">
+          <div class="col tags">
+            <h2 class="mb-4">Filtre pela Tag</h2>
+            <form class="pesquisa-tag p-4" [formGroup]="TagSelect">
+              <div class="tag-reclamacao">
+                <input list="box" type="search" class="form-select text-center borda"
+                  formControlName="tagForm">
+                  <datalist id="box">
+                    <option selected>Todos</option>
+                    <option>Poluição</option>
+                    <option>Saneamento</option>
+                    <option>Infraestrutura</option>
+                    <option>Inovação</option>
+                    <option>Denúncia</option>
+                    <option>Nenhum</option>
+                  </datalist>
+                </div>
+              </form>
+            </div>
+          </div>
+          <!-- Card -->
+          <div
+            class="row my-4 cards-div d-flex justify-content-center align-items-center"
+            >
+            <!-- Row onde ficam os cards -->
+            @if (!vazio) {
+              <!-- verificando se a lista é vazia -->
+              @for (noticia of data$ | async; track noticia) {
+                <div class="col-12 p-4 px-5">
+                  <!-- Coluna do card-->
+                  <app-noticias-card [cardNoticia]="noticia"></app-noticias-card>
+                </div>
+              }
+              <!-- Fim da Coluna do card -->
+            }
+            @else {
+            <div class="erro m-auto my-3">
+              <app-not-found [mensageError]="erro"></app-not-found>
+            </div>
+          }
+        </div>
       </div>
-    }
-  </div>
-</div>

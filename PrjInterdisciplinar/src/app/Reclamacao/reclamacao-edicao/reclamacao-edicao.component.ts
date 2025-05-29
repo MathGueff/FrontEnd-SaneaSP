@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+
 import { Component, inject, OnInit } from '@angular/core';
 import { NonNullableFormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
@@ -10,7 +10,7 @@ import { NotFoundComponent } from '../../Common/not-found/not-found.component';
 
 @Component({
     selector: 'app-reclamacao-edicao',
-    imports: [CommonModule, ReactiveFormsModule, NotFoundComponent],
+    imports: [ReactiveFormsModule, NotFoundComponent],
     templateUrl: './reclamacao-edicao.component.html',
     styleUrl: './reclamacao-edicao.component.css'
 })

@@ -2,30 +2,30 @@
   <!-- background -->
   <div
     class="container-fluid d-flex justify-content-center align-items-center flex-column"
-  >
+    >
     <!-- Div do container-->
     <!-- Formulário de Cadastro -->
     <form
       [formGroup]="formNoticia"
       class="form d-flex justify-content-center align-items-center flex-column m-3 p-4 rounded"
-    >
+      >
       <h3 class="mb-4">Cadastre uma nova notícia</h3>
       <!-- Campos do formulário -->
       <div class="row mt-3">
         <!-- Inputs do formulário (título e descrição) -->
         @for (input of inputs; track $index) {
-        <app-form-field
-          [formGroup]="this.formNoticia"
-          formName="form-noticia"
-          controlName="{{ input.controlName }}"
-          icon="{{ input.icon }}"
-          label="{{ input.label }}"
-          placeholder="{{ input.placeholder }}"
-          [required]="input.required || false"
-          [validators]="input.validators || []"
-          [fieldType]="input.typeField || ''"
-        >
-        </app-form-field>
+          <app-form-field
+            [formGroup]="this.formNoticia"
+            formName="form-noticia"
+            controlName="{{ input.controlName }}"
+            icon="{{ input.icon }}"
+            label="{{ input.label }}"
+            placeholder="{{ input.placeholder }}"
+            [required]="input.required || false"
+            [validators]="input.validators || []"
+            [fieldType]="input.typeField || ''"
+            >
+          </app-form-field>
         }
 
         <!-- TAGS -->
@@ -81,22 +81,23 @@
             <label class="form-label">
               <img src="assets/icones/black/tag_icon.svg" class="label-icon" />
               {{
-                tags.length > 0
-                  ? "Tags adicionadas:"
-                  : "Adicione ou escolha uma tag:"
+              tags.length > 0
+              ? "Tags adicionadas:"
+              : "Adicione ou escolha uma tag:"
               }}
             </label>
             <ul>
-              <li
-                class="valor_adicionado"
-                *ngFor="let tag of tags"
-                (click)="removeTag(tag)"
-                data-bs-toggle="tooltip"
-                data-bs-placement="top"
-                title="Remover tag"
-              >
-                {{ tag }}
-              </li>
+              @for (tag of tags; track tag) {
+                <li
+                  class="valor_adicionado"
+                  (click)="removeTag(tag)"
+                  data-bs-toggle="tooltip"
+                  data-bs-placement="top"
+                  title="Remover tag"
+                  >
+                  {{ tag }}
+                </li>
+              }
             </ul>
           </div>
         </div>
@@ -138,20 +139,21 @@
             <label class="form-label">
               <img src="assets/icones/black/fonte_icon.svg" class="label-icon" />
               {{
-                fontes.length > 0 ? "Fontes adicionadas:" : "Adicione fontes:"
+              fontes.length > 0 ? "Fontes adicionadas:" : "Adicione fontes:"
               }}
             </label>
             <ul>
-              <li
-                class="valor_adicionado"
-                *ngFor="let fonte of fontes"
-                (click)="removeFonte(fonte)"
-                data-bs-toggle="tooltip"
-                data-bs-placement="top"
-                title="Remover fonte"
-              >
-                {{ fonte }}
-              </li>
+              @for (fonte of fontes; track fonte) {
+                <li
+                  class="valor_adicionado"
+                  (click)="removeFonte(fonte)"
+                  data-bs-toggle="tooltip"
+                  data-bs-placement="top"
+                  title="Remover fonte"
+                  >
+                  {{ fonte }}
+                </li>
+              }
             </ul>
           </div>
         </div>
@@ -160,61 +162,62 @@
           <img
             class="form-icon me-1"
             src="img/paginas/reclamacoes/image-icon.svg"
-          />
-          <label for="imagem-doenca" class="form-label">Imagem:</label>
-          <input
-            formControlName="imagem"
-            type="file"
-            class="form-control"
-            id="imagem-doenca"
-            name="imagem-doenca"
-            (change)="setPreview($event)"
-          />
-        </div>
-
-        <div class="col-md-12 col-sm-12 mb-3">
-          <div class="preview d-flex flex-column align-items-center">
-            <label class="form-label">Pré-visualização</label>
-            <img
-              class="preview_img img-fluid"
-              (click)="removePreview()"
-              [src]="src"
-              id="imgPreview"
-              *ngIf="src"
             />
+            <label for="imagem-doenca" class="form-label">Imagem:</label>
+            <input
+              formControlName="imagem"
+              type="file"
+              class="form-control"
+              id="imagem-doenca"
+              name="imagem-doenca"
+              (change)="setPreview($event)"
+              />
+            </div>
+
+            <div class="col-md-12 col-sm-12 mb-3">
+              <div class="preview d-flex flex-column align-items-center">
+                <label class="form-label">Pré-visualização</label>
+                @if (src) {
+                  <img
+                    class="preview_img img-fluid"
+                    (click)="removePreview()"
+                    [src]="src"
+                    id="imgPreview"
+                    />
+                }
+              </div>
+            </div>
           </div>
-        </div>
+          <!-- Fim dos campos -->
+
+          <div class="justify-content-center">
+            <!-- Caso algum dos controls esteja inválido -->
+            <app-check-error
+              [enum]="this.noticiaErrorStatus"
+              error="invalid-control"
+              message="Campos não preenchidos corretamente"
+            ></app-check-error>
+
+            <!-- Caso já exista um usuário -->
+            <app-check-error
+              [enum]="this.noticiaErrorStatus"
+              error="invalid-name"
+              message="Uma notícia já foi cadastrada com esse título"
+            ></app-check-error>
+          </div>
+
+          <div
+            class="d-flex gap-2 flex-wrap-reverse justify-content-center align-items-center"
+            >
+            <!-- Botão de voltar -->
+            <button class="form-btn" routerLink="/pagina-admin">VOLTAR</button>
+
+            <!-- Botão de entrar -->
+            <button class="form-btn" type="submit" (click)="onSubmit()">
+              CADASTRAR
+            </button>
+          </div>
+        </form>
+        <!-- Fim do formulário -->
       </div>
-      <!-- Fim dos campos -->
-
-      <div class="justify-content-center">
-        <!-- Caso algum dos controls esteja inválido -->
-        <app-check-error
-          [enum]="this.noticiaErrorStatus"
-          error="invalid-control"
-          message="Campos não preenchidos corretamente"
-        ></app-check-error>
-
-        <!-- Caso já exista um usuário -->
-        <app-check-error
-          [enum]="this.noticiaErrorStatus"
-          error="invalid-name"
-          message="Uma notícia já foi cadastrada com esse título"
-        ></app-check-error>
-      </div>
-
-      <div
-        class="d-flex gap-2 flex-wrap-reverse justify-content-center align-items-center"
-      >
-        <!-- Botão de voltar -->
-        <button class="form-btn" routerLink="/pagina-admin">VOLTAR</button>
-
-        <!-- Botão de entrar -->
-        <button class="form-btn" type="submit" (click)="onSubmit()">
-          CADASTRAR
-        </button>
-      </div>
-    </form>
-    <!-- Fim do formulário -->
-  </div>
-</div>
+    </div>

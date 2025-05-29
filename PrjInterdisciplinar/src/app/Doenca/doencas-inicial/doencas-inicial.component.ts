@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+
 import { Component, inject, OnInit } from '@angular/core';
 import { Doencas } from '../../models/class/doencas';
 import { DoencaCardComponent } from '../doenca-card/doenca-card.component';
@@ -10,11 +10,10 @@ import { DoencaService } from '../../Services/doenca.service';
 @Component({
     selector: 'app-doencas-inicial',
     imports: [
-        CommonModule,
-        DoencaCardComponent,
-        ReactiveFormsModule,
-        NotFoundComponent,
-    ],
+    DoencaCardComponent,
+    ReactiveFormsModule,
+    NotFoundComponent
+],
     templateUrl: './doencas-inicial.component.html',
     styleUrl: './doencas-inicial.component.css'
 })

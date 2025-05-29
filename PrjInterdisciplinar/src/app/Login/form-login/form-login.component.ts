@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+
 import { Component, inject, OnInit } from '@angular/core';
 import { NonNullableFormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
@@ -11,7 +11,7 @@ import { FormValidatorEnum } from '../../models/enums/FormValidatorEnum.enum';
 
 @Component({
     selector: 'app-form-login',
-    imports: [RouterModule, ReactiveFormsModule, CommonModule, FormFieldComponent],
+    imports: [RouterModule, ReactiveFormsModule, FormFieldComponent],
     templateUrl: './form-login.component.html',
     styleUrls: ['./form-login.component.css', '../links-redes.css']
 })

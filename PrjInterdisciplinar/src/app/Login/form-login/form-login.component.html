@@ -1,58 +1,64 @@
 <div class="background"> <!-- background -->
-    <div class="container-fluid d-flex justify-content-center align-items-center"> <!-- Div do container-->
-        <!-- Início do formulário -->
-        <form [formGroup]="formLogin" (ngSubmit)="onSubmit()" class="form d-flex justify-content-center align-items-center flex-column m-3 p-3 rounded">
-            <h3 class="mb-4">Faça login</h3>
-            <!-- Campos de entrada -->
-            <div class="row mt-3" style="width: 100%; max-width: 270px;">
-                <!-- Controls do formulário -->
-                <div class="col-md-12 col-sm-12 mb-3" *ngFor="let input of inputs">
-                    <app-form-field
-                        [formGroup]="this.formLogin"
-                        type = {{input.type}}
-                        formName="form-login"
-                        controlName="{{input.controlName}}"
-                        icon="{{input.icon}}"
-                        label="{{input.label}}"
-                        placeholder="{{input.placeholder}}"
-                        [required]="input.required || false"
-                        [validators]="input.validators || []"
-                        [fieldType]="input.typeField || ''"
-                    >
-                    </app-form-field>
-                </div>
-            </div>
-            <!-- Fim dos campos -->
+  <div class="container-fluid d-flex justify-content-center align-items-center"> <!-- Div do container-->
+    <!-- Início do formulário -->
+    <form [formGroup]="formLogin" (ngSubmit)="onSubmit()" class="form d-flex justify-content-center align-items-center flex-column m-3 p-3 rounded">
+      <h3 class="mb-4">Faça login</h3>
+      <!-- Campos de entrada -->
+      <div class="row mt-3" style="width: 100%; max-width: 270px;">
+        <!-- Controls do formulário -->
+        @for (input of inputs; track input) {
+          <div class="col-md-12 col-sm-12 mb-3">
+            <app-form-field
+              [formGroup]="this.formLogin"
+              type = {{input.type}}
+              formName="form-login"
+              controlName="{{input.controlName}}"
+              icon="{{input.icon}}"
+              label="{{input.label}}"
+              placeholder="{{input.placeholder}}"
+              [required]="input.required || false"
+              [validators]="input.validators || []"
+              [fieldType]="input.typeField || ''"
+              >
+            </app-form-field>
+          </div>
+        }
+      </div>
+      <!-- Fim dos campos -->
 
-            <!-- Link para redefinição de senha -->
-            <div class="mb-3">
-                <a routerLink="" class="link-form">Esqueci minha senha</a>
-            </div>
+      <!-- Link para redefinição de senha -->
+      <div class="mb-3">
+        <a routerLink="" class="link-form">Esqueci minha senha</a>
+      </div>
 
-            <!-- Caso algum dos controls esteja inválido -->
-            <span *ngIf="checkIfFormError('invalid-control')" class="texto-validacao-erro-form mb-2">
-                <img src="assets/login/erro_icon.svg" alt=""> Campos obrigatórios não preenchidos ou inválidos
-            </span> <!-- Método checkIfFormError retorna true caso o erro específico esteja ocorrendo (parametro é o valor de string do enum)-->
+      <!-- Caso algum dos controls esteja inválido -->
+      @if (checkIfFormError('invalid-control')) {
+        <span class="texto-validacao-erro-form mb-2">
+          <img src="assets/login/erro_icon.svg" alt=""> Campos obrigatórios não preenchidos ou inválidos
+        </span>
+        } <!-- Método checkIfFormError retorna true caso o erro específico esteja ocorrendo (parametro é o valor de string do enum)-->
 
-            <!-- Caso os campos digitados não pertençam a um usuário existente -->
-            <span *ngIf="checkIfFormError('invalid-user')" class="texto-validacao-erro-form mb-2">
-                <img src="assets/login/erro_icon.svg" alt=""> Email e/ou senha incorretos 
-            </span>
+        <!-- Caso os campos digitados não pertençam a um usuário existente -->
+        @if (checkIfFormError('invalid-user')) {
+          <span class="texto-validacao-erro-form mb-2">
+            <img src="assets/login/erro_icon.svg" alt=""> Email e/ou senha incorretos
+          </span>
+        }
 
-            <!-- Botão de entrar -->
-            <button class="form-btn" type="submit">ENTRAR</button>
+        <!-- Botão de entrar -->
+        <button class="form-btn" type="submit">ENTRAR</button>
 
-            <!-- Links para entrada com redes sociais -->
-            <div class="links-redes d-flex justify-content-between align-items-center mt-4 w-50">
-                <a href=""><img src="assets/login/facebook_icon.svg" alt="Login com facebook"></a>
-                <a href=""><img src="assets/login/google_icon.svg" alt="Login com linkedin"></a>
-                <a href=""><img src="assets/login/x_icon.svg" alt="Login com conta google"></a>
-            </div>
+        <!-- Links para entrada com redes sociais -->
+        <div class="links-redes d-flex justify-content-between align-items-center mt-4 w-50">
+          <a href=""><img src="assets/login/facebook_icon.svg" alt="Login com facebook"></a>
+          <a href=""><img src="assets/login/google_icon.svg" alt="Login com linkedin"></a>
+          <a href=""><img src="assets/login/x_icon.svg" alt="Login com conta google"></a>
+        </div>
 
-            <!-- Link para página de cadastro -->
-            <div class="mt-4">
-                <span class="texto-link-form">Não possui uma conta? <a routerLink="/cadastro" class="link-form">Clique para criar uma</a></span>
-            </div>
-        </form> <!-- Fim do formulário -->
+        <!-- Link para página de cadastro -->
+        <div class="mt-4">
+          <span class="texto-link-form">Não possui uma conta? <a routerLink="/cadastro" class="link-form">Clique para criar uma</a></span>
+        </div>
+      </form> <!-- Fim do formulário -->
     </div>
-</div>
+  </div>

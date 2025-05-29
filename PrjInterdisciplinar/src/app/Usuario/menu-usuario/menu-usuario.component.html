@@ -4,31 +4,33 @@
     <!-- Div do container-->
     <div class="row mt-4 mb-4 cards-div">
       <!-- Div da row-->
-      <div class="col-12 p-4 ps-5 pe-5" *ngFor="let card of cards">
-        <!-- Div da coluna-->
-        <div
-          routerLink="{{ card.path }}"
-          class="card h-100"
-          tabindex="-1"
-        >
-          <!-- Div do card-->
-          <h5 class="card-header pt-3 pb-3">{{ card.nome }}</h5>
-          <div class="card-body">
-            <div class="d-flex align-items-center flex-wrap">
-              <img
-                src="{{ card.src }}"
-                alt="icone"
-                class="card-icon img-fluid me-3"
-              />
-              <h5 class="card-title mb-0">{{ card.titulo }}</h5>
-            </div>
-            <p class="card-text">{{ card.info }}</p>
-            <a routerLink="{{ card.path }}" class="btn btn-primary btn-md"
-              >Ver {{ card.nome }}</a
+      @for (card of cards; track card) {
+        <div class="col-12 p-4 ps-5 pe-5">
+          <!-- Div da coluna-->
+          <div
+            routerLink="{{ card.path }}"
+            class="card h-100"
+            tabindex="-1"
             >
-          </div>
+            <!-- Div do card-->
+            <h5 class="card-header pt-3 pb-3">{{ card.nome }}</h5>
+            <div class="card-body">
+              <div class="d-flex align-items-center flex-wrap">
+                <img
+                  src="{{ card.src }}"
+                  alt="icone"
+                  class="card-icon img-fluid me-3"
+                  />
+                  <h5 class="card-title mb-0">{{ card.titulo }}</h5>
+                </div>
+                <p class="card-text">{{ card.info }}</p>
+                <a routerLink="{{ card.path }}" class="btn btn-primary btn-md"
+                  >Ver {{ card.nome }}</a
+                  >
+                </div>
+              </div>
+            </div>
+          }
         </div>
       </div>
     </div>
-  </div>
-</div>
