@@ -12,11 +12,10 @@ import { SweetAlertService } from '../../Services/sweetAlert.service';
 import { FormValidatorEnum } from '../../models/enums/FormValidatorEnum.enum';
 
 @Component({
-  selector: 'app-form-doenca',
-  standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, RouterModule, FormFieldComponent, CheckErrorComponent],
-  templateUrl: './form-doenca.component.html',
-  styleUrl: './form-doenca.component.css'
+    selector: 'app-form-doenca',
+    imports: [CommonModule, ReactiveFormsModule, RouterModule, FormFieldComponent, CheckErrorComponent],
+    templateUrl: './form-doenca.component.html',
+    styleUrl: './form-doenca.component.css'
 })
 export class FormDoencaComponent {
   //#region Dependencias

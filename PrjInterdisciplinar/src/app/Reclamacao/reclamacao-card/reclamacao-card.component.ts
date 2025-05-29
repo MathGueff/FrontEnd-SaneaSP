@@ -6,11 +6,10 @@ import { CommonModule } from '@angular/common';
 import { IUser } from '../../models/interface/IUser.model';
 
 @Component({
-  selector: 'app-reclamacao-card',
-  standalone: true,
-  imports: [RouterLink,CommonModule],
-  templateUrl: './reclamacao-card.component.html',
-  styleUrl: './reclamacao-card.component.css'
+    selector: 'app-reclamacao-card',
+    imports: [RouterLink, CommonModule],
+    templateUrl: './reclamacao-card.component.html',
+    styleUrl: './reclamacao-card.component.css'
 })
 export class ReclamacaoCardComponent   {
   @Input () card !: Reclamacao;

@@ -9,11 +9,10 @@ import { Router, RouterLink } from '@angular/router';
 import { ViacepService } from '../../Services/viacep.service';
 
 @Component({
-  selector: 'app-reclamacao-form',
-  standalone: true,
-  imports: [ReactiveFormsModule, CommonModule, RouterLink],
-  templateUrl: './reclamacao-form.component.html',
-  styleUrl: './reclamacao-form.component.css',
+    selector: 'app-reclamacao-form',
+    imports: [ReactiveFormsModule, CommonModule, RouterLink],
+    templateUrl: './reclamacao-form.component.html',
+    styleUrl: './reclamacao-form.component.css'
 })
 export class ReclamacaoFormComponent implements OnInit {
   private formBuider = inject(NonNullableFormBuilder);

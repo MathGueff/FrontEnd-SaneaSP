@@ -20,11 +20,10 @@ import { ITagCadastro } from '../../models/interface/ITagCadastro.model';
 import { ITagListFilter } from '../../models/interface/ITagListFilter.interface';
 
 @Component({
-  selector: 'app-tag-modal',
-  standalone: true,
-  imports: [ReactiveFormsModule, CommonModule, FormFieldComponent, ToastComponent],
-  templateUrl: './tag-modal.component.html',
-  styleUrl: './tag-modal.component.css',
+    selector: 'app-tag-modal',
+    imports: [ReactiveFormsModule, CommonModule, FormFieldComponent, ToastComponent],
+    templateUrl: './tag-modal.component.html',
+    styleUrl: './tag-modal.component.css'
 })
 export class TagModalComponent implements AfterViewInit, OnInit{
   // === INPUTS ==============================

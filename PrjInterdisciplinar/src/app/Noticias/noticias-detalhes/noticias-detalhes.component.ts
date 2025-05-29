@@ -8,11 +8,10 @@ import { NoticiaService } from '../../Services/noticia.service';
 import { NotFoundComponent } from "../../Common/not-found/not-found.component";
 
 @Component({
-  selector: 'app-noticias-detalhes',
-  standalone: true,
-  imports: [CommonModule, RouterLink, NotFoundComponent],
-  templateUrl: './noticias-detalhes.component.html',
-  styleUrl: './noticias-detalhes.component.css'
+    selector: 'app-noticias-detalhes',
+    imports: [CommonModule, RouterLink, NotFoundComponent],
+    templateUrl: './noticias-detalhes.component.html',
+    styleUrl: './noticias-detalhes.component.css'
 })
 export class NoticiasDetalhesComponent {
   private noticiaService = inject(NoticiaService)

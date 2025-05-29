@@ -6,11 +6,10 @@ import { LoginLinkComponent } from "../login-link/login-link.component";
 import { UserService } from '../../../Services/user.service';
 
 @Component({
-  selector: 'app-navbar',
-  standalone: true,
-  imports: [CommonModule, RouterLink, RouterLinkActive, LoginLinkComponent],
-  templateUrl: './navbar.component.html',
-  styleUrl: './navbar.component.css'
+    selector: 'app-navbar',
+    imports: [CommonModule, RouterLink, RouterLinkActive, LoginLinkComponent],
+    templateUrl: './navbar.component.html',
+    styleUrl: './navbar.component.css'
 })
 export class NavbarComponent {
   protected userService = inject(UserService);

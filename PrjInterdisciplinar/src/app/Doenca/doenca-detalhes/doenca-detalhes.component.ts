@@ -7,11 +7,10 @@ import { NotFoundComponent } from '../../Common/not-found/not-found.component';
 
 
 @Component({
-  selector: 'app-doenca-detalhes',
-  standalone: true,
-  imports: [CommonModule, RouterModule, NotFoundComponent],
-  templateUrl: './doenca-detalhes.component.html',
-  styleUrl: './doenca-detalhes.component.css'
+    selector: 'app-doenca-detalhes',
+    imports: [CommonModule, RouterModule, NotFoundComponent],
+    templateUrl: './doenca-detalhes.component.html',
+    styleUrl: './doenca-detalhes.component.css'
 })
 export class DoencaDetalhesComponent {
   //variaveis para poder controlar o componente NotFound

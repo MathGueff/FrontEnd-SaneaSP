@@ -12,11 +12,10 @@ import { FormFieldComponent } from "../../Common/form-field/form-field.component
 import { FormValidatorEnum } from '../../models/enums/FormValidatorEnum.enum';
 
 @Component({
-  selector: 'app-form-cadastro',
-  standalone: true,
-  imports: [RouterLink, CommonModule, ReactiveFormsModule, FormFieldComponent],
-  templateUrl: './form-cadastro.component.html',
-  styleUrls: ['./form-cadastro.component.css', '../links-redes.css']
+    selector: 'app-form-cadastro',
+    imports: [RouterLink, CommonModule, ReactiveFormsModule, FormFieldComponent],
+    templateUrl: './form-cadastro.component.html',
+    styleUrls: ['./form-cadastro.component.css', '../links-redes.css']
 })
 export class FormCadastroComponent implements OnInit{
   private formBuilderService = inject(NonNullableFormBuilder);

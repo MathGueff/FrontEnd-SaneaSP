@@ -9,11 +9,10 @@ import { INoticia } from '../../models/interface/INoticias.model';
 import { NotFoundComponent } from '../../Common/not-found/not-found.component';
 
 @Component({
-  selector: 'app-noticias-inicial',
-  standalone: true,
-  imports: [CommonModule, NoticiasCardComponent, ReactiveFormsModule, NotFoundComponent],
-  templateUrl: './noticias-inicial.component.html',
-  styleUrl: './noticias-inicial.component.css'
+    selector: 'app-noticias-inicial',
+    imports: [CommonModule, NoticiasCardComponent, ReactiveFormsModule, NotFoundComponent],
+    templateUrl: './noticias-inicial.component.html',
+    styleUrl: './noticias-inicial.component.css'
 })
 export class NoticiasInicialComponent implements OnInit{
   private noticiaService = inject(NoticiaService);

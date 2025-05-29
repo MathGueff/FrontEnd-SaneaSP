@@ -8,16 +8,15 @@ import { NotFoundComponent } from '../../Common/not-found/not-found.component';
 import { DoencaService } from '../../Services/doenca.service';
 
 @Component({
-  selector: 'app-doencas-inicial',
-  standalone: true,
-  imports: [
-    CommonModule,
-    DoencaCardComponent,
-    ReactiveFormsModule,
-    NotFoundComponent,
-  ],
-  templateUrl: './doencas-inicial.component.html',
-  styleUrl: './doencas-inicial.component.css',
+    selector: 'app-doencas-inicial',
+    imports: [
+        CommonModule,
+        DoencaCardComponent,
+        ReactiveFormsModule,
+        NotFoundComponent,
+    ],
+    templateUrl: './doencas-inicial.component.html',
+    styleUrl: './doencas-inicial.component.css'
 })
 export class DoencasInicialComponent implements OnInit {
   private doencaService = inject(DoencaService)
