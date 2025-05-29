@@ -13,11 +13,10 @@ import { SweetAlertService } from '../../Services/sweetAlert.service';
 import { FormValidatorEnum } from '../../models/enums/FormValidatorEnum.enum';
 
 @Component({
-  selector: 'app-form-noticia',
-  standalone: true,
-  imports: [ReactiveFormsModule, CommonModule, RouterModule, FormFieldComponent, CheckErrorComponent],
-  templateUrl: './form-noticia.component.html',
-  styleUrl: './form-noticia.component.css'
+    selector: 'app-form-noticia',
+    imports: [ReactiveFormsModule, CommonModule, RouterModule, FormFieldComponent, CheckErrorComponent],
+    templateUrl: './form-noticia.component.html',
+    styleUrl: './form-noticia.component.css'
 })
 export class FormNoticiaComponent {
   //#region Injections

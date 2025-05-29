@@ -8,11 +8,10 @@ import { TagModalComponent } from '../../Tag/tag-modal/tag-modal.component';
 import { ILinkPanelAdmin, ILinkSidebarAdmin } from '../../models/interface/ILink.model';
 
 @Component({
-  selector: 'app-menu-admin',
-  standalone: true,
-  imports: [CommonModule, RouterLink, TagModalComponent],
-  templateUrl: './menu-admin.component.html',
-  styleUrl: './menu-admin.component.css',
+    selector: 'app-menu-admin',
+    imports: [CommonModule, RouterLink, TagModalComponent],
+    templateUrl: './menu-admin.component.html',
+    styleUrl: './menu-admin.component.css'
 })
 export class MenuAdminComponent {
   constructor(private router: Router) {}

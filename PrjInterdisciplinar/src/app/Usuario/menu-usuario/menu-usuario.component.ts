@@ -4,11 +4,10 @@ import { MenuUsuario } from '../../models/class/menu-usuario';
 import { RouterLink, Router} from '@angular/router';
 
 @Component({
-  selector: 'app-menu-usuario',
-  standalone: true,
-  imports: [CommonModule, RouterLink],
-  templateUrl: './menu-usuario.component.html',
-  styleUrl: './menu-usuario.component.css'
+    selector: 'app-menu-usuario',
+    imports: [CommonModule, RouterLink],
+    templateUrl: './menu-usuario.component.html',
+    styleUrl: './menu-usuario.component.css'
 })
 export class MenuUsuarioComponent{
   constructor(private router: Router) {}

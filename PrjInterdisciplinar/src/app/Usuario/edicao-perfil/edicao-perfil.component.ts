@@ -14,11 +14,10 @@ import { Router } from '@angular/router';
 import { FormValidatorEnum } from '../../models/enums/FormValidatorEnum.enum';
 
 @Component({
-  selector: 'app-edicao-perfil',
-  standalone: true,
-  imports: [CommonModule, FormFieldComponent, ReactiveFormsModule],
-  templateUrl: './edicao-perfil.component.html',
-  styleUrl: './edicao-perfil.component.css',
+    selector: 'app-edicao-perfil',
+    imports: [CommonModule, FormFieldComponent, ReactiveFormsModule],
+    templateUrl: './edicao-perfil.component.html',
+    styleUrl: './edicao-perfil.component.css'
 })
 export class EdicaoPerfilComponent implements OnInit {
   protected cadastroErrorStatus: CadastroErrorStatus = CadastroErrorStatus.None;

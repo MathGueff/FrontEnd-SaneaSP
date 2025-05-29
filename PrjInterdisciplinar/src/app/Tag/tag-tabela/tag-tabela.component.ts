@@ -9,11 +9,10 @@ import { IResponseList } from '../../models/interface/IResponseList.model';
 import { RouterModule } from '@angular/router';
 
 @Component({
-  selector: 'app-update-tag',
-  standalone: true,
-  imports: [CommonModule, TagModalComponent, RouterModule],
-  templateUrl: './tag-tabela.component.html',
-  styleUrl: './tag-tabela.component.css'
+    selector: 'app-update-tag',
+    imports: [CommonModule, TagModalComponent, RouterModule],
+    templateUrl: './tag-tabela.component.html',
+    styleUrl: './tag-tabela.component.css'
 })
 export class TagTabelaComponent implements OnInit{
 

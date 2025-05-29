@@ -3,11 +3,10 @@ import { CommonModule } from '@angular/common';
 import { SweetAlertService } from '../../Services/sweetAlert.service';
 
 @Component({
-  selector: 'app-dell-noticia',
-  standalone: true,
-  imports: [CommonModule],
-  templateUrl: './dell-noticia.component.html',
-  styleUrl: './dell-noticia.component.css'
+    selector: 'app-dell-noticia',
+    imports: [CommonModule],
+    templateUrl: './dell-noticia.component.html',
+    styleUrl: './dell-noticia.component.css'
 })
 
 export class DellNoticiaComponent {

@@ -9,11 +9,10 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { NotFoundComponent } from '../../Common/not-found/not-found.component';
 
 @Component({
-  selector: 'app-reclamacao-edicao',
-  standalone: true,
-  imports: [CommonModule,ReactiveFormsModule,NotFoundComponent],
-  templateUrl: './reclamacao-edicao.component.html',
-  styleUrl: './reclamacao-edicao.component.css'
+    selector: 'app-reclamacao-edicao',
+    imports: [CommonModule, ReactiveFormsModule, NotFoundComponent],
+    templateUrl: './reclamacao-edicao.component.html',
+    styleUrl: './reclamacao-edicao.component.css'
 })
 export class ReclamacaoEdicaoComponent implements OnInit {
     private formBuider = inject(NonNullableFormBuilder);

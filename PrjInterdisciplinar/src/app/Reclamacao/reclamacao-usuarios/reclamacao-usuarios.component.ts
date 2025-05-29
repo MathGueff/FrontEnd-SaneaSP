@@ -12,11 +12,10 @@ import { type } from 'os';
 
 
 @Component({
-  selector: 'app-reclamacao-usuarios',
-  standalone: true,
-  imports: [ReclamacaoCardComponent,NotFoundComponent,CommonModule,RouterLink,ReactiveFormsModule],
-  templateUrl: './reclamacao-usuarios.component.html',
-  styleUrl: './reclamacao-usuarios.component.css'
+    selector: 'app-reclamacao-usuarios',
+    imports: [ReclamacaoCardComponent, NotFoundComponent, CommonModule, RouterLink, ReactiveFormsModule],
+    templateUrl: './reclamacao-usuarios.component.html',
+    styleUrl: './reclamacao-usuarios.component.css'
 })
 export class ReclamacaoUsuariosComponent implements OnInit {
   private userService = inject(UserService);

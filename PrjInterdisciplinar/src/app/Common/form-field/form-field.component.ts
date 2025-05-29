@@ -26,11 +26,10 @@ import { FormValidatorEnum } from '../../models/enums/FormValidatorEnum.enum';
  * - change: Event - Disparado em mudanças (para selects)
  */
 @Component({
-  selector: 'app-form-field',
-  standalone: true,
-  imports: [ReactiveFormsModule, CommonModule],
-  templateUrl: './form-field.component.html',
-  styleUrl: './form-field.component.css'
+    selector: 'app-form-field',
+    imports: [ReactiveFormsModule, CommonModule],
+    templateUrl: './form-field.component.html',
+    styleUrl: './form-field.component.css'
 })
 export class FormFieldComponent{
   @Input() formGroup !: FormGroup; //Form gruop utilizado no componente pai

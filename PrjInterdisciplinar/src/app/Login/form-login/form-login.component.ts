@@ -10,11 +10,10 @@ import { FormValidatorEnum } from '../../models/enums/FormValidatorEnum.enum';
 
 
 @Component({
-  selector: 'app-form-login',
-  standalone: true,
-  imports: [RouterModule, ReactiveFormsModule, CommonModule, FormFieldComponent],
-  templateUrl: './form-login.component.html',
-  styleUrls: ['./form-login.component.css', '../links-redes.css']
+    selector: 'app-form-login',
+    imports: [RouterModule, ReactiveFormsModule, CommonModule, FormFieldComponent],
+    templateUrl: './form-login.component.html',
+    styleUrls: ['./form-login.component.css', '../links-redes.css']
 })
 
 export class FormLoginComponent implements OnInit{
