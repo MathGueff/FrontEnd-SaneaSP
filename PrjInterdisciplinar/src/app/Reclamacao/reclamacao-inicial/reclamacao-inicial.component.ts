@@ -23,11 +23,13 @@ export class ReclamacaoInicialComponent implements OnInit {
   protected authService = inject(AuthService);
   protected reclamacaoService = inject(ReclamacaoService);
   usuarioAtivo$ = this.authService.getObservableCurrentUser(); // Observable com as informações do admin
-  reclamacoes$ !: Observable<IReclamacao[]>
+  reclamacoes$ !: Observable<IReclamacao[]>;
   private reclamacaoSubject =new BehaviorSubject<Reclamacao[]>([] as any);
   data$:Observable<Reclamacao[]> = this.reclamacaoSubject.asObservable();
-  protected vazio: boolean = false;
-  erro : string = "";
+  protected vazio !: boolean
+  erroMensage !: string;
+  erroType : string = "carregando";
+
   TagSelect: FormGroup;
 
   constructor(private fb:FormBuilder){
@@ -39,12 +41,24 @@ export class ReclamacaoInicialComponent implements OnInit {
   }
 
   ngOnInit():void{
-    this.reclamacoes$.subscribe((reclamacoes)=>{
-      if(reclamacoes.length === 0){
-        this.vazio = true;
-        this.erro = "Reclamações"
+
+    this.reclamacoes$.subscribe({
+      next:(reclamacoes)=>{
+      if(reclamacoes.length !== 0){
+        this.vazio = false;
       }
-      console.log(reclamacoes)
+      else{
+        this.vazio = true;
+        this.erroMensage = "Reclamações";
+        this.erroType = "Não foi possível encontrar Reclamação"
+      }
+    },
+      error:()=>{
+        this.vazio = true;
+        this.erroMensage = "Não foi possível encontrar Reclamação";
+        this.erroType = "error"
+      }
+
     });
 
   }

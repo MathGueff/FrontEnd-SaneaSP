@@ -1,11 +1,16 @@
 <div class="card d-flex flex-column">
   <div class="card-header p-3 d-flex justify-content-center ">
-    <h3>Não foi possível encontrar {{mensageError}} </h3>
+    <h3>{{mensageError}} </h3>
   </div>
   <div class="card-body d-flex flex-column align-items-center">
-    <div class="imagem">
-      <img src="img/paginas/reclamacoes/nao-encontrado.png" alt="imagem de erro">
-    </div>
+    <figure class="imagem">
+      @if(type === "error"){
+        <img src="img/paginas/reclamacoes/nao-encontrado.png" alt="imagem de erro">
+      }
+      @else if (type === "carregando") {
+        <img src="img/paginas/reclamacoes/carregando.png" alt="imagem de erro">
+      }
+    </figure>
     @if (caminhoVoltar !== "") {
       <div class="erro mt-2">
         <a class="btn btn-primary" routerLink="{{caminhoVoltar}}">Voltar</a>

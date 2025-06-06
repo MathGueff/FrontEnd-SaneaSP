@@ -13,4 +13,5 @@ export class NotFoundComponent {
 
   @Input() mensageError ?: string;
   @Input() caminhoVoltar ?: string = "";
+  @Input() type ?: string = "error"
 }

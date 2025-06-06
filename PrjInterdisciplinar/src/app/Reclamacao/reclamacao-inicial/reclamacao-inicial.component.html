@@ -55,7 +55,7 @@
               >Adicionar</a
             >
           <div class="adicionar-btn py-3">
-            
+
           </div>
         </div>
       </div>
@@ -76,7 +76,7 @@
       }
       @else {
         <div class="col m-5">
-          <app-not-found [mensageError] = "erro"></app-not-found>
+          <app-not-found [mensageError] = "erroMensage" [type]="erroType"></app-not-found>
         </div>
       }
 
