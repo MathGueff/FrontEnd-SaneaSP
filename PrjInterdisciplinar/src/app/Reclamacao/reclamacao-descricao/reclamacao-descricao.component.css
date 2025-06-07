@@ -2,7 +2,6 @@
   background-color: #e0e0e0;
   border-radius: 10px;
   border: 1px solid #bdbbbb;
-  height: auto;
 }
 
 .info {
@@ -20,6 +19,5 @@
   text-align: justify;
 }
 img{
-  width: 200px;
   height: 200px;
 }

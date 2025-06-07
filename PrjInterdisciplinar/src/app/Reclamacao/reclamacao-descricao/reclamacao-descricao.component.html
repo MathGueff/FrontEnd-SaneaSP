@@ -1,9 +1,8 @@
-<div class="background d-flex">
   <!-- Verifica se encontrou a reclamação -->
   @if (existReclamcao) {
-  <div *ngIf="reclamacao$ | async as reclamacao" class="painel m-5 justifica rounded">
-    <header class="header-painel p-3 mb-3 d-flex flex-line gap-5">
-      <article id="carouselImage" class="carousel slide imgPainel">
+  <div *ngIf="reclamacao$ | async as reclamacao" class=" container-md container-sm-fluid painel my-sm-0 my-md-5 text-sm-center ">
+    <header class="row header-painel justify-content-sm-center">
+      <article id="carouselImage" class="carousel slide col-sm-12 col-md-3 ">
         <div class="carousel-inner">
           @for (imagem of reclamacao.Imagens; track imagem.id; let firstImage = $first ) {
             @if(firstImage){
@@ -34,28 +33,27 @@
           </button>
         }
       </article>
-      <div>
+      <div class=" col-sm-12 col-md-9 row">
         <h2>{{ reclamacao.titulo }}</h2>
         <span>
           {{ reclamacao.data }}
         </span>
       </div>
     </header>
-    <article class="info pb-3 my-3 ms-3 me-4">
+    <article class="row info pb-3 my-3 ms-3 me-4">
       <p class="paragraf-painel">
         {{ reclamacao.descricao }}
       </p>
     </article>
 
-    <footer class="d-flex justify-content-between my-3 ms-3 me-4">
+    <footer class=" row my-3 ms-3 me-4">
       <a class="btn btn-primary" routerLink="{{caminhoVoltar}}">Voltar</a>
       <a class="btn btn-primary" routerLink="/comentario/{{ reclamacao.id }}">Ir para Comentários</a>
     </footer>
   </div>
   }
   @else {
-  <div class="erro my-5 m-auto">
+  <div class="erro">
     <app-not-found [mensageError]="erro" [caminhoVoltar]="caminhoVoltar"></app-not-found>
   </div>
   }
-</div>
