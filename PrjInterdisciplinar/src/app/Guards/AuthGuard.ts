@@ -20,7 +20,7 @@ export class AuthGuard implements CanActivate {
     const token = this.authService.getAuthToken();
 
     if (!token) {
-      this.showGuardMessage('Faça login para ter acesso');
+      this.authService.logout();
       this.router.navigate(['/login']);
       return of(false);
     }
@@ -30,8 +30,9 @@ export class AuthGuard implements CanActivate {
         this.authService.setCurrentUser(user);
         return true;
       }),
-      catchError(() => {
-        this.showGuardMessage('Faça login para ter acesso');
+      catchError((e) => {
+        this.showGuardMessage(e.error.message)
+        this.authService.logout();
         this.router.navigate(['/login']);
         return of(false);
       })

@@ -67,7 +67,7 @@ export class ReclamacaoFormComponent implements OnInit {
         },
       });
 
-      this.router.navigate(['reclamacao-inicial']);
+      this.router.navigate(['reclamacao']);
     }
   }
   ngOnInit(): void {

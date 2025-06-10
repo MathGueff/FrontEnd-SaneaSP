@@ -3,6 +3,7 @@ import { Injectable, OnInit } from '@angular/core';
 import { BehaviorSubject, Observable, of } from 'rxjs';
 import { IUser } from '../models/interface/IUser.model';
 import { SweetAlertService } from './sweetAlert.service';
+import { LocalStorageService } from './localStorage.service';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
@@ -16,23 +17,27 @@ export class AuthService {
   private activeAdminSubject = new BehaviorSubject<IUser | null>(null);
   activeAdmin$: Observable<IUser | null> = this.activeAdminSubject.asObservable();
 
-  constructor( private httpClient: HttpClient,private sweetAlertService: SweetAlertService)
-  {
+  constructor( 
+    private httpClient: HttpClient,
+    private sweetAlertService: SweetAlertService,
+    private localStorageService : LocalStorageService){
+    this.loginAtStartApplication()
+  }
+
+  /* Realiza o login ao iniciar o site (ou recarregar) */
+  private loginAtStartApplication(){
     if (this.getAuthToken()) {
       this.login().subscribe({
         next: (response) => {
           this.setCurrentUser(response);
         },
         error: (e) => {
-          sweetAlertService.showMessage(
-            'Não foi possível realizar o login',
-            true
-          );
+          this.logout()
+          this.sweetAlertService.showMessage(e.error.message, true);
         },
       });
     }
   }
-
 
   /* Adquire o IUser atual logado */
   public getCurrentUser(): IUser | null {
@@ -45,15 +50,16 @@ export class AuthService {
     if (user.nivel == 1) this.activeAdminSubject.next(user);
   }
 
-
-  autenticate(email: string, senha: string) {
-    return this.httpClient.post<{ token: string }>(this.API_URL, {
+  /* Gera o token JWT para login */
+  public autenticate(email: string, senha: string) {
+    return this.httpClient.post<string>(this.API_URL, {
       email,
       senha,
     });
   }
 
-  login() {
+  /* Adquire dados do usuário atual utilizando o token JWT gerado */
+  public login() {
     const token = this.getAuthToken();
 
     let headers = new HttpHeaders();
@@ -64,24 +70,29 @@ export class AuthService {
     return this.httpClient.get<IUser>(this.API_URL + '/me', { headers });
   }
 
-
-  logout() {
-    localStorage.removeItem('access-token');
+  /* Remove todos os dados armazenados do usuário logado */
+  public logout() {
+    this.removeAuthToken();
     this.activeUserSubject.next(null);
     this.activeAdminSubject.next(null);
-    this.sweetAlertService.showMessage('Você se desconectou da sua conta')
   }
 
-  getAuthToken(): string | null {
-    //Verificando se localStorage está disponível
-    if (typeof window !== 'undefined' && window.localStorage) {
-      const token = localStorage.getItem('access-token');
-      if (token) return token;
-    }
-    return null;
+  /* Adquire o token JWT armazenado no localStorage */
+  public getAuthToken(): string | null {
+    return this.localStorageService.get('access-token')
   }
 
-  getObservableCurrentUser():Observable<IUser|null >{
+  /* Adquire o token JWT armazenado no localStorage */
+  public setAuthToken(token : string){
+    this.localStorageService.set('access-token',token)
+  }
+
+  public removeAuthToken(){
+    this.localStorageService.remove('access-token')
+  }
+
+  /* Adquire o Observable de usuario ativo */
+  getObservableCurrentUser():Observable<IUser|null>{
     return this.activeUser$
   }
 }

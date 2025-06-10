@@ -19,8 +19,9 @@ export class AdminGuard implements CanActivate {
   canActivate(): Observable<boolean> {
     const token = this.authService.getAuthToken();
 
+    //Caso não haja token armazenado no localStorage
     if (!token) {
-      this.showGuardMessage('Faça login para ter acesso');
+      this.authService.logout()
       this.router.navigate(['/login']);
       return of(false);
     }
@@ -28,13 +29,19 @@ export class AdminGuard implements CanActivate {
     return this.authService.login().pipe(
       map(user => {
         this.authService.setCurrentUser(user);
-        if(Number(user.nivel) === 1) return true
-        this.showGuardMessage('Você não tem acesso a esse recurso');
-        this.router.navigate(['']);
-        return false;
+
+        //Caso o usuário não seja admin
+        if(Number(user.nivel) !== 1) {
+          this.router.navigate(['']);
+          return false;
+        }
+        
+        return true
       }),
-      catchError(() => {
-        this.showGuardMessage('Faça login para ter acesso');
+      catchError((e) => {
+        //Se receber 401, 403 ou outro retorno inesperado
+        this.showGuardMessage(e.error.message)
+        this.authService.logout()
         this.router.navigate(['/login']);
         return of(false);
       })
