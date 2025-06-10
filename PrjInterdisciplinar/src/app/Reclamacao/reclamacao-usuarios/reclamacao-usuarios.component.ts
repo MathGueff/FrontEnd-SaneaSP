@@ -10,6 +10,8 @@ import {FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { Reclamacao } from '../../models/class/reclamacao';
 import { type } from 'os';
 import { AuthService } from '../../Services/auth.service';
+import { ReclamacaoService } from '../../Services/reclamacao.service';
+import { IReclamacao } from '../../models/interface/IReclamacao.interface';
 
 
 @Component({
@@ -22,8 +24,8 @@ import { AuthService } from '../../Services/auth.service';
 export class ReclamacaoUsuariosComponent implements OnInit {
   private authService = inject(AuthService);
   private router = inject(Router);
-  private reclamacaoSubject =new BehaviorSubject<Reclamacao[]>([] as any);
-  protected data$:Observable<Reclamacao[]> = this.reclamacaoSubject.asObservable();
+  private reclamacaoService = inject(ReclamacaoService);
+  protected data$ !: Observable<IReclamacao[]>;
   protected user !: IUser;
   protected vazio: boolean = true;
   protected erro : string = "";
@@ -60,38 +62,18 @@ export class ReclamacaoUsuariosComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.thisIsUser();
+    this.reclamacaoService.getByUsuarioReclamacao().subscribe({
+      next:(reclamacoes) =>{
+        console.log(reclamacoes);
+      }
+    })
 
-    // this.user =
-    // {
-    //   id: 2,
-    //   nome: 'Davy',
-    //   email: 'davy@gmail.com',
-    //   senha: 'davy',
-    //   endereco:{
-    //     cep: '17571802',
-    //     bairro : 'Jardim Europa',
-    //     logradouro : 'Rua Rock',
-    //     cidade : 'Votorantim'
-    //   }
-    // }
-
-    this.user = this.thisIsUser();
 
     this.TagSelect.valueChanges.subscribe(()=>{
       console.log("Esta funcionando");
     })
-    // let lista : IReclamacao [];
-    // lista = this.reclamacoes.filter((reclamacao) =>{
-    //   return (reclamacao.Usuario?.id === this.user?.id)
-    // })
-    // if(lista.length > 0 ){
-    //   this.vazio = false;
-    //   this.reclamacaoSubject.next(lista);
-    // }
-    // else{
-    //   this.vazio = true;
-    //   this.erro = "Nenhuma Reclamação encontrada";
-    // }
+
   }
  private thisIsUser() : IUser{
     let user = this.authService.getCurrentUser();
