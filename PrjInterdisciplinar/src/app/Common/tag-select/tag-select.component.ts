@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, inject, OnInit, Output } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { Component, EventEmitter, inject, Input, OnInit, Output } from '@angular/core';
+import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { ITag } from '../../models/interface/ITag.model';
 import { TagService } from '../../Services/tag.service';
 
@@ -20,7 +20,7 @@ export class TagSelectComponent implements OnInit {
     nome: "Nenhum"
   }
   public select = new FormControl<ITag>(this.tagNull);
-  public tagSelected : ITag[] = [];
+  @Input() public tagSelected : ITag[] = [];
   @Output() public alertSelected = new EventEmitter<ITag[]>();
 
   ngOnInit(): void {

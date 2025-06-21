@@ -4,7 +4,7 @@ import Swal, { SweetAlertResult, SweetAlertOptions } from 'sweetalert2';
 @Injectable({ providedIn: 'root' })
 export class SweetAlertService {
   /**
-   * 
+   *
    * @param message mensagem a ser mostrada no alert
    * @param error true - ícone de sucesso | false - ícone de erro
    * @returns Promise com o alert (para manipular estados do sweetAlert aberto)
@@ -36,6 +36,24 @@ export class SweetAlertService {
       background: '#295A80',
       color: '#e8e3e3',
       confirmButtonText: 'Excluir',
+      denyButtonText: `Cancelar`,
+      reverseButtons: true,
+      customClass: {
+        confirmButton: 'sweet_btn_success',
+        title : 'sweet_title',
+      },
+    });
+    return result.isConfirmed;
+  }
+    public async confirmUpdate(message:string):Promise<boolean>{
+      const  result = await Swal.fire({
+      title: message,
+      showConfirmButton: true,
+      showDenyButton: true,
+      icon:'question',
+      background: '#295A80',
+      color: '#e8e3e3',
+      confirmButtonText: 'Salvar',
       denyButtonText: `Cancelar`,
       reverseButtons: true,
       customClass: {

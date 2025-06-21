@@ -30,6 +30,6 @@ export interface ICreateReclamacao{
     numero ?: string,
     complemento ?: string,
     idUsuario: number,
-    Imagens ?: IImagem,
+    Imagens : string[],
     Tags : number[]
 }

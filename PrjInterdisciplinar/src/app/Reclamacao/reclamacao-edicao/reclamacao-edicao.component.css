@@ -1,0 +1,31 @@
+button{
+  text-transform: uppercase;
+}
+.form-control, .form-select, .tags-selected{
+  width: 100% !important;
+  height: auto !important;
+}
+.tag{
+  font-size: 1em;
+  letter-spacing: 1.2px;
+  border-radius: 5px;
+  color: var(--cor-quaternaria);
+  text-align: center;
+  max-width: 140px;
+}
+.preview-img{
+  border-radius: 5px;
+  box-shadow: 0 8px 8px rgba(0, 0, 0, 0.1);
+}
+p, .required-form{
+  color: red;
+}
+.invalid-form{
+  font-size: .85em;
+  margin-top: 5px;
+}
+textarea{
+  resize: none;
+  overflow: hidden;
+}
+

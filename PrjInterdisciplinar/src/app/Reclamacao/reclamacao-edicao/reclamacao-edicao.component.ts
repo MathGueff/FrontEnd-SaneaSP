@@ -6,28 +6,36 @@ import { ViacepService } from '../../Services/viacep.service';
 import { UserService } from '../../Services/user.service';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { NotFoundComponent } from '../../Common/not-found/not-found.component';
-import { IReclamacao } from '../../models/interface/IReclamacao.interface';
+import { ICreateReclamacao, IReclamacao } from '../../models/interface/IReclamacao.interface';
+import { ReclamacaoService } from '../../Services/reclamacao.service';
+import { TagSelectComponent } from "../../Common/tag-select/tag-select.component";
+import { ImageSelectComponent } from "../../Common/image-select/image-select.component";
+import { ITag } from '../../models/interface/ITag.model';
+import { SweetAlertService } from '../../Services/sweetAlert.service';
 
 @Component({
   selector: 'app-reclamacao-edicao',
   standalone: true,
-  imports: [CommonModule,ReactiveFormsModule,NotFoundComponent],
+  imports: [CommonModule, ReactiveFormsModule, NotFoundComponent, TagSelectComponent, ImageSelectComponent],
   templateUrl: './reclamacao-edicao.component.html',
   styleUrl: './reclamacao-edicao.component.css'
 })
 export class ReclamacaoEdicaoComponent implements OnInit {
+    private reclamacaoService = inject(ReclamacaoService);
+    private sweetAlertService = inject(SweetAlertService);
     private formBuider = inject(NonNullableFormBuilder);
     private router = inject(Router);
     private viacepService = inject(ViacepService);
-    private userService = inject(UserService);
     private activeRouter = inject(ActivatedRoute);
+
     protected erro : string = "";
     protected vazio : boolean = false;
     protected path :string = "../";
+    private tagsID:number[] = [];
+    private images : string[] = [];
+    protected reclamacao !: IReclamacao;
 
-    private reclamacao ?: IReclamacao
-
-    rows: number = 2;
+    rows: number = 5;
     src: any = null;
 
 
@@ -42,37 +50,43 @@ export class ReclamacaoEdicaoComponent implements OnInit {
       cidade: [this.reclamacao?.cidade, [Validators.required]],
       bairro: [this.reclamacao?.bairro, [Validators.required]],
       rua: [this.reclamacao?.rua, [Validators.required]],
-      complemento: [this.reclamacao?.complemento],
-      Tag: [this.reclamacao?.Tags],
-      Imagem: [this.reclamacao?.Imagens],
+      complemento: [this.reclamacao?.complemento]
     });
 
-    onSubmit() {
-      if (this.form.valid) {
-        console.log(this.form.value);
-        this.router.navigate(['reclamacao-inicial']);
+   async onSubmit() {
+      const response = await this.sweetAlertService.confirmUpdate("Confirmar Atualização");
+      if (this.form.valid && response) {
+          const updateReclamacao: ICreateReclamacao = {
+            ...this.form.value as ICreateReclamacao,
+            Imagens: this.images,
+            Tags: this.tagsID
+          }
+          this.reclamacaoService.putReclamacao(updateReclamacao,this.reclamacao.id).subscribe({
+            next: ()=>{
+              this.sweetAlertService.showMessage("Reclamação Atualizada com sucesso");
+              this.router.navigate(['reclamacao']);
+            },
+            error:()=>{
+              this.sweetAlertService.showMessage("Erro ao atualizar reclamação",true)
+            }
+          })
       }
     }
     ngOnInit(): void {
       this.activeRouter.params.subscribe((params)=>{
-        // this.reclamacao = this.reclamacoes.find((objReclamacao)=>{
-        //   return objReclamacao.id ===  Number(params['id']);
-        // })
-        if(!this.reclamacao){
-          this.vazio = true;
-          this.erro = "Reclamação Inexistente";
-          return;
-        }
-        this.form.patchValue({
-          titulo: this.reclamacao.titulo,
-          descricao: this.reclamacao?.descricao,
-          cep: this.reclamacao.cep,
-          cidade: this.reclamacao.cidade,
-          rua: this.reclamacao.rua,
-          bairro: this.reclamacao.bairro,
-          complemento: this.reclamacao.complemento,
-        });
-        console.log(this.reclamacao);
+        this.reclamacaoService.getByIdReclamacao(Number(params['id'])).subscribe({
+          next:(result) => {
+            this.reclamacao = result;
+            this.inicializeForm(this.reclamacao);
+          },
+          error:() => {
+            if(!this.reclamacao){
+              this.vazio = true;
+              this.erro = "Reclamação Inexistente";
+              return;
+            }
+          },
+        })
       })
       this.form.controls.cep.valueChanges.subscribe(() => {
         if (
@@ -126,12 +140,10 @@ export class ReclamacaoEdicaoComponent implements OnInit {
       let objTextArea = document.querySelector('textarea');
       if (objTextArea?.value) {
         if (objTextArea.scrollHeight >= objTextArea.offsetHeight) {
-          this.rows += 1;
+          objTextArea.rows += 1
           console.log("Scroll Height: "+ objTextArea.scrollHeight);
           console.log("offsetHeight: "+ objTextArea.offsetHeight);
         }
-      } else {
-        this.rows = 2;
       }
     }
     protected setPreview(event: any){
@@ -145,4 +157,30 @@ export class ReclamacaoEdicaoComponent implements OnInit {
         reader.readAsDataURL(file);
       }
     }
+    private inicializeForm(reclamacao : IReclamacao):void{
+      this.form.patchValue({
+        titulo: reclamacao.titulo,
+        descricao: reclamacao?.descricao,
+        cep: reclamacao.cep,
+        cidade: reclamacao.cidade,
+        rua: reclamacao.rua,
+        bairro: reclamacao.bairro,
+        complemento: reclamacao.complemento,
+        numero:reclamacao.numero
+      });
+      this.autoResize()
+      this.imagesChange([]);
+    }
+
+  protected tagsChange($event: ITag[]) {
+    this.tagsID = $event.map((tag)=>tag.id)
+  }
+  protected imagesChange($event: File[]){
+    if($event.length > 0){
+      $event.map((file)=> this.images.push(file.name));
+    }
+    else{
+      this.reclamacao.Imagens.map((image)=>this.images.push(image.nome))
+    }
+  }
 }

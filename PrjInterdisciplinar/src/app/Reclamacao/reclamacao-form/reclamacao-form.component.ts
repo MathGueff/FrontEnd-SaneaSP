@@ -14,12 +14,13 @@ import { ICreateReclamacao } from '../../models/interface/IReclamacao.interface'
 import { ITag } from '../../models/interface/ITag.model';
 import { IResponseList } from '../../models/interface/IResponseList.model';
 import { TagSelectComponent } from "../../Common/tag-select/tag-select.component";
+import { ImageSelectComponent } from "../../Common/image-select/image-select.component";
 
 
 @Component({
   selector: 'app-reclamacao-form',
   standalone: true,
-  imports: [ReactiveFormsModule, CommonModule, RouterLink, TagSelectComponent],
+  imports: [ReactiveFormsModule, CommonModule, RouterLink, TagSelectComponent, ImageSelectComponent],
   templateUrl: './reclamacao-form.component.html',
   styleUrl: './reclamacao-form.component.css',
 })
@@ -30,11 +31,10 @@ export class ReclamacaoFormComponent implements OnInit {
   private router = inject(Router);
   private viacepService = inject(ViacepService);
   private sweetService = inject(SweetAlertService);
-  private tagIDs:number[] = [];
-  public selectedTags : ITag[] = [];
-  rows: number = 2;
-  src: any = null;
 
+  private images : string[] = []
+  private tagIDs:number[] = [];
+  rows: number = 2;
 
    form = this.formBuider.group({
     titulo: ['', [Validators.required]],
@@ -47,8 +47,7 @@ export class ReclamacaoFormComponent implements OnInit {
     cidade: ['', [Validators.required]],
     bairro: ['', [Validators.required]],
     rua: ['', [Validators.required]],
-    complemento: [''],
-    imagem: [''],
+    complemento: ['']
   });
 
   onSubmit() {
@@ -56,18 +55,22 @@ export class ReclamacaoFormComponent implements OnInit {
       const reclamacao: ICreateReclamacao ={
         ...this.form.value as ICreateReclamacao,
         idUsuario:1,
-        Tags: this.tagIDs
+        Tags: this.tagIDs,
+        Imagens: this.images
       };
       this.reclamacaoService.postReclamacao(reclamacao).subscribe({
         next:() => {
           this.sweetService.showMessage("Reclamação Criada com sucesso!");
+          this.router.navigate(['reclamacao']);
         },
         error: (err) => {
-          this.sweetService.showMessage(`Não foi possivel criar Reclamação: ${err}`,true)
+          this.sweetService.showMessage(`Não foi possivel criar Reclamação. Verifique se preencheu corretamente o formulário`,true)
+          console.log(err);
         },
       });
-
-      this.router.navigate(['reclamacao']);
+    }
+    else{
+      this.sweetService.showMessage('Formulário inválido. Preeche todos os dados obrigatórios *',true)
     }
   }
   ngOnInit(): void {
@@ -131,19 +134,12 @@ export class ReclamacaoFormComponent implements OnInit {
       this.rows = 2;
     }
   }
-  protected setPreview(event: any){
-    const file:File = event.target.files[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onload = (e: any) => {
-        this.src = e.target.result;
-
-      };
-      reader.readAsDataURL(file);
-    }
-  }
   public tagsChange($event: ITag[]) {
-    this.selectedTags = $event;
-    this.tagIDs = this.selectedTags.map((tag)=>tag.id)
+    this.tagIDs = $event.map((tag)=>tag.id)
+  }
+  public imagesChange($event: File[]){
+    if($event.length > 0){
+      $event.map((file)=> this.images.push(file.name));
+    }
   }
 }
