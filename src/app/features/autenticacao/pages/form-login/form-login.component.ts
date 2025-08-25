@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+
 import { Component, ElementRef, inject, OnInit, ViewChild } from '@angular/core';
 import { NonNullableFormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
@@ -11,11 +11,11 @@ import { AuthService } from '@core/services/auth.service';
 import { SweetAlertService } from '@shared/services/sweet-alert.service';
 
 @Component({
-  selector: 'app-form-login',
-  standalone: true,
-  imports: [RouterModule, ReactiveFormsModule, CommonModule, FormFieldComponent],
-  templateUrl: './form-login.component.html',
-  styleUrls: ['./form-login.component.css', '../links-redes.css']
+    selector: 'app-form-login',
+    imports: [RouterModule, ReactiveFormsModule, FormFieldComponent],
+    templateUrl: './form-login.component.html',
+    styleUrls: ['./form-login.component.css', '../links-redes.css'],
+    standalone:true
 })
 
 export class FormLoginComponent{

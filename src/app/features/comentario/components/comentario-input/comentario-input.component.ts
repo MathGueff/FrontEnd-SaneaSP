@@ -1,13 +1,12 @@
-import { CommonModule } from '@angular/common';
+
 import { Component } from '@angular/core';
 import {FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 
 @Component({
-  selector: 'app-comentario-input',
-  standalone: true,
-  imports: [CommonModule, ReactiveFormsModule],
-  templateUrl: './comentario-input.component.html',
-  styleUrl: './comentario-input.component.css'
+    selector: 'app-comentario-input',
+    imports: [ReactiveFormsModule],
+    templateUrl: './comentario-input.component.html',
+    styleUrl: './comentario-input.component.css'
 })
 export class ComentarioInputComponent {
 

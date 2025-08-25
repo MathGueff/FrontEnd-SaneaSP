@@ -9,11 +9,11 @@ import { Router, RouterModule } from '@angular/router';
 import { ErrorService } from '@core/services/error-handler.service';
 
 @Component({
-  selector: 'app-update-tag',
-  standalone: true,
-  imports: [CommonModule, TagModalComponent, RouterModule],
-  templateUrl: './tag-tabela.component.html',
-  styleUrl: './tag-tabela.component.css'
+    selector: 'app-update-tag',
+    imports: [CommonModule, TagModalComponent, RouterModule],
+    templateUrl: './tag-tabela.component.html',
+    styleUrl: './tag-tabela.component.css',
+    standalone:true
 })
 export class TagTabelaComponent implements OnInit{
 

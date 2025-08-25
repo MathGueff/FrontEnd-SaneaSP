@@ -5,28 +5,30 @@
         <!-- Header do comentario -->
         <div class="header-comentario py-2">
           <!-- Informações da Reclamação -->
-          <app-comentario-cima
-            *ngIf="reclamacao$ | async as reclamacao"
-            [reclamacao]="reclamacao"
-          ></app-comentario-cima>
+          @if (reclamacao$ | async; as reclamacao) {
+            <app-comentario-cima
+              [reclamacao]="reclamacao"
+            ></app-comentario-cima>
+          }
         </div>
         <!-- Corpo Comentario -->
         <div
           class="body-comentario w-100 d-flex flex-column h-auto pt-5 pb-3 gap-5 p-0"
-        >
+          >
           <!-- looping do componente a baixo. a diretiva ngStyle irá colocar o comentário a esquerda caso o Id do Administrador seja nulo, se for nulo colocará o comentário a direita -->
 
           @if (comentario$ | async) {
-          <app-comentario-baixo
-            *ngFor="let comentario of comentario$ | async"
+            @for (comentario of comentario$ | async; track comentario) {
+              <app-comentario-baixo
             [ngStyle]="{
               'justify-content':
                 comentario.objAdmin === null ? 'flex-start' : 'flex-end'
             }"
-            class="autor"
-            [comentario]="comentario"
-          >
-          </app-comentario-baixo>
+                class="autor"
+                [comentario]="comentario"
+                >
+              </app-comentario-baixo>
+            }
           }
         </div>
         <div class="novo-comentario pt-5 pb-3 px-0">
@@ -36,8 +38,8 @@
     </div>
   }
   @else {
-    <div class="erro m-auto my-3">
-      <app-not-found [mensageError]="erro" [caminhoVoltar]="caminhoVoltar"></app-not-found>
-    </div>
-  }
+  <div class="erro m-auto my-3">
+    <app-not-found [mensageError]="erro" [caminhoVoltar]="caminhoVoltar"></app-not-found>
+  </div>
+}
 </div>

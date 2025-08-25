@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+
 import { Component, Input } from '@angular/core';
 import { FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { FormValidatorEnum } from '@shared/enums/form-validator.enum';
@@ -26,11 +26,11 @@ import { FormValidatorEnum } from '@shared/enums/form-validator.enum';
  * - change: Event - Disparado em mudanças (para selects)
  */
 @Component({
-  selector: 'app-form-field',
-  standalone: true,
-  imports: [ReactiveFormsModule, CommonModule],
-  templateUrl: './form-field.component.html',
-  styleUrl: './form-field.component.css'
+    selector: 'app-form-field',
+    imports: [ReactiveFormsModule],
+    templateUrl: './form-field.component.html',
+    styleUrl: './form-field.component.css',
+    standalone:true
 })
 export class FormFieldComponent{
   @Input() formGroup !: FormGroup; //Form gruop utilizado no componente pai

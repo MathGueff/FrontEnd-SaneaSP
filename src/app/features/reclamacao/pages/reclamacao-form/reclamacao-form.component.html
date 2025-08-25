@@ -15,9 +15,11 @@
             <span class="required-form">*</span>
           </label>
           <input type="text" formControlName="titulo" id="titulo" class="form-control" placeholder="Título da Reclamação" />
-          <div *ngIf="form.get('titulo')?.invalid && form.get('titulo')?.touched">
-            <p class="invalid-form ms-3">Campo obrigatório</p>
-          </div>
+          @if (form.get('titulo')?.invalid && form.get('titulo')?.touched) {
+            <div>
+              <p class="invalid-form ms-3">Campo obrigatório</p>
+            </div>
+          }
         </div>
 
         <div class="col-md-12 col-sm-12 mb-3">
@@ -26,12 +28,14 @@
             <span class="required-form">*</span>
           </label>
           <textarea class="form-control" formControlName="descricao" id="descricao" [rows]="rows" placeholder="Explique sua reclamação"
-            (input)="autoResize()"></textarea>
-          <div *ngIf="
-              form.get('descricao')?.invalid && form.get('descricao')?.touched
-            ">
-            <p class="invalid-form ms-3">Campo obrigatório</p>
-          </div>
+          (input)="autoResize()"></textarea>
+          @if (
+            form.get('descricao')?.invalid && form.get('descricao')?.touched
+            ) {
+            <div>
+              <p class="invalid-form ms-3">Campo obrigatório</p>
+            </div>
+          }
         </div>
 
         <div class="col-md-6 col-sm-12 mb-3">
@@ -40,9 +44,11 @@
             <span class="required-form">*</span>
           </label>
           <input type="text" formControlName="cep" class="form-control" id="cep" placeholder="Digite seu CEP" />
-          <div *ngIf="form.get('cep')?.invalid && form.get('cep')?.touched">
-            <p class="invalid-form ms-3">Campo obrigatório</p>
-          </div>
+          @if (form.get('cep')?.invalid && form.get('cep')?.touched) {
+            <div>
+              <p class="invalid-form ms-3">Campo obrigatório</p>
+            </div>
+          }
         </div>
 
         <div class="col-md-6 col-sm-12 mb-3">
@@ -51,25 +57,29 @@
             <span class="required-form">*</span>
           </label>
           <input type="text" formControlName="rua" class="form-control" id="rua" placeholder="Rua do usuário" />
-          <div *ngIf="form.get('rua')?.invalid && form.get('rua')?.touched">
-            <p class="invalid-form ms-3">Campo obrigatório</p>
-          </div>
+          @if (form.get('rua')?.invalid && form.get('rua')?.touched) {
+            <div>
+              <p class="invalid-form ms-3">Campo obrigatório</p>
+            </div>
+          }
         </div>
 
         <!-- <div class="col-md-12 col-sm-12 mb-3">
-          <a (click)="this.exibirCamposEndereco = !this.exibirCamposEndereco"
-            class="small mt-2 link-form">{{exibirCamposEndereco ? "Mostrar apenas CEP" : "Não sei meu CEP"}} </a>
-        </div> -->
-        <div class="col-md-6 col-sm-12 mb-3">
-          <img class="icon me-1" src="images/login/endereco_icon.svg" />
-          <label for="bairro" class="form-label">Bairro:
-            <span class="required-form">*</span>
-          </label>
-          <input type="text" formControlName="bairro" class="form-control" id="bairro"
-            placeholder="Bairro do usuário" />
-          <div *ngIf="form.get('bairro')?.invalid && form.get('bairro')?.touched">
-            <p class="invalid-form ms-3">Campo obrigatório</p>
-          </div>
+        <a (click)="this.exibirCamposEndereco = !this.exibirCamposEndereco"
+        class="small mt-2 link-form">{{exibirCamposEndereco ? "Mostrar apenas CEP" : "Não sei meu CEP"}} </a>
+      </div> -->
+      <div class="col-md-6 col-sm-12 mb-3">
+        <img class="icon me-1" src="images/login/endereco_icon.svg" />
+        <label for="bairro" class="form-label">Bairro:
+          <span class="required-form">*</span>
+        </label>
+        <input type="text" formControlName="bairro" class="form-control" id="bairro"
+          placeholder="Bairro do usuário" />
+          @if (form.get('bairro')?.invalid && form.get('bairro')?.touched) {
+            <div>
+              <p class="invalid-form ms-3">Campo obrigatório</p>
+            </div>
+          }
         </div>
 
         <div class="col-md-6 col-sm-12 mb-3">
@@ -79,22 +89,26 @@
           </label>
           <input type="text" formControlName="cidade" class="form-control" id="cidade"
             placeholder="Cidade do usuário" />
-          <div *ngIf="form.get('cidade')?.invalid && form.get('cidade')?.touched">
-            <p class="invalid-form ms-3">Campo obrigatório</p>
+            @if (form.get('cidade')?.invalid && form.get('cidade')?.touched) {
+              <div>
+                <p class="invalid-form ms-3">Campo obrigatório</p>
+              </div>
+            }
           </div>
-        </div>
 
-        <div class="col-md-6 col-sm-12 mb-3">
-          <img class="icon me-1" src="images/login/endereco_icon.svg" />
-          <label for="numero" class="form-label">Número:
-            <span class="required-form">*</span>
-          </label>
-          <input type="number" formControlName="numero" class="form-control" id="numero"
-            placeholder="Seu número de endereço" />
-          <div *ngIf="form.get('numero')?.invalid && form.get('numero')?.touched">
-            <p class="invalid-form ms-3">Campo obrigatório</p>
-          </div>
-        </div>
+          <div class="col-md-6 col-sm-12 mb-3">
+            <img class="icon me-1" src="assets/login/endereco_icon.svg" />
+            <label for="numero" class="form-label">Número:
+              <span class="required-form">*</span>
+            </label>
+            <input type="number" formControlName="numero" class="form-control" id="numero"
+              placeholder="Seu número de endereço" />
+              @if (form.get('numero')?.invalid && form.get('numero')?.touched) {
+                <div>
+                  <p class="invalid-form ms-3">Campo obrigatório</p>
+                </div>
+              }
+            </div>
 
 
         <div class="col-md-6 col-sm-12 mb-3">
@@ -105,24 +119,24 @@
             placeholder="Complemento" />
         </div>
 
-        <hr />
+              <hr />
 
-        <app-tag-select [isFiltro]="false" (alertSelected)="tagsChange($event)"></app-tag-select>
+              <app-tag-select [isFiltro]="false" (alertSelected)="tagsChange($event)"></app-tag-select>
 
-        <app-image-select (alertImageSelect)="imagesChange($event)"></app-image-select>
+              <app-image-select (alertImageSelect)="imagesChange($event)"></app-image-select>
 
-      </form>
-      <!-- Botão de entrar -->
-      <div class="botoes d-flex justify-content-between w-100 align-items-center">
-        <a routerLink="@" class="mt-3">
-          <button class=" form-btn">voltar</button>
-        </a>
+            </form>
+            <!-- Botão de entrar -->
+            <div class="botoes d-flex justify-content-between w-100 align-items-center">
+              <a routerLink="@" class="mt-3">
+                <button class=" form-btn">voltar</button>
+              </a>
 
-        <button type="submit" (click)="onSubmit()" class="mt-3 form-btn">
-          cadastrar
-        </button>
+              <button type="submit" (click)="onSubmit()" class="mt-3 form-btn">
+                cadastrar
+              </button>
+            </div>
+          </div>
+          <!-- Fim do formulário -->
+        </div>
       </div>
-    </div>
-    <!-- Fim do formulário -->
-  </div>
-</div>

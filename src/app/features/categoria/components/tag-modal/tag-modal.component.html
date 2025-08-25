@@ -4,7 +4,7 @@
   tabindex="-1"
   aria-labelledby="modalTag"
   #modalTag
->
+  >
   <div class="modal-dialog">
     <div class="modal-content">
       <form [formGroup]="FormGroupSelected">
@@ -37,33 +37,36 @@
                   formValidatorsEnum.MinLength
                 ]"
               ></app-form-field>
-            } 
-            @else if (modalTypeSelected == modalTypes.Exclusao 
-              || modalTypeSelected == modalTypes.Edicao) 
+            }
+            @else if (modalTypeSelected == modalTypes.Exclusao
+            || modalTypeSelected == modalTypes.Edicao)
             {
               @if(!this.tagPreloaded){
-                <button 
-                  type="button"
-                  *ngIf="tagSelected" 
-                  class="btn btn-primary focus-terciario me-2" 
-                  id="botao-voltar-header" (click)="resetSearchForm()"> 
-                    <img src="icons/ui/white/return_icon.svg" alt="">
-                </button>
-                <span
-                  >{{modalTypeSelected == modalTypes.Edicao ? 'Editando' : 'Excluindo'}} 
-                    a categoria:<strong> passo {{ tagSelected ? "2" : "1" }} de
-                  2</strong>
-                </span>
-                <hr />
+                @if (tagSelected) {
+                  <button
+                    type="button"
+                    *ngIf="tagSelected" 
+                    class="btn btn-primary focus-terciario me-2" 
+                    id="botao-voltar-header" (click)="resetSearchForm()"> 
+                      <img src="assets/icones/operacoes/white/return_icon.svg" alt="">
+                  </button>
+                }
+              <span
+                  >{{modalTypeSelected == modalTypes.Edicao ? 'Editando' : 'Excluindo'}}
+                  a categoria:<strong> passo {{ tagSelected ? "2" : "1" }} de
+                2</strong>
+              </span>
+              <hr />
               }
-             
+            }
+
 
               @if(!tagSelected){
                 <app-form-field
                   [formGroup]="formPesquisaTag"
                   formName="form-pesquisa-tag"
                   controlName="nomePesquisaTag"
-                  icon="icons/actions/black/search_icon.svg"
+                  icon="assets/icones/operacoes/black/search_icon.svg"
                   label="Pesquise pelo nome da categoria:"
                   placeholder="Digite o nome da categoria:"
                   fieldType="input"
@@ -72,24 +75,23 @@
                   [validators]="[formValidatorsEnum.Required]"
                 ></app-form-field>
 
-                <!-- Compartilha a subscription para não precisar ficar recriando a comparação -->
-                <ng-container *ngIf="tagList$ | async as tags">
-                <!-- Texto informativo que aparece apenas enquanto não houver texto inserido -->
-                @if(this.formPesquisaTag.controls.nomePesquisaTag.value.length == 0){
-                  <div
-                    class="texto-informativo d-flex justify-content-center align-items-center mt-2 gap-2"
+            <!-- Compartilha a subscription para não precisar ficar recriando a comparação -->
+            @if (tagList$ | async; as tags) {
+              <!-- Texto informativo que aparece apenas enquanto não houver texto inserido -->
+              @if(this.formPesquisaTag.controls.nomePesquisaTag.value.length == 0){
+                <div
+                  class="texto-informativo d-flex justify-content-center align-items-center mt-2 gap-2"
                   >
                     <img
-                      src="icons/ui/black/info_icon.svg"
+                      src="assets/icones/black/info_icon.svg"
                       alt="ícone de informação"
                     />
                     <span>Filtre pelo nome e selecione abaixo para começar a editar</span>
                   </div>
                 }
-                  
-                @if(tags?.length <= 1 
+                @if(tags?.length <= 1
                   && this.formPesquisaTag.controls.nomePesquisaTag.value.length > 0)
-                {
+                  {
                   <div class="search-feedback-container
                      d-flex text-center justify-content-center mt-2 p-1">
                     <img
@@ -99,24 +101,22 @@
                           : 'error'
                       }}_icon.svg"
                       alt=""
-                    />
-                    <span>
-                      {{
+                      />
+                      <span>
+                        {{
                         tags.length == 1
-                          ? "Selecione abaixo para começar a editar"
-                          : "Nenhuma categoria encontrada!"
-                      }}
-                    </span>
-                  </div>
-                }
-
-                <!-- Lista de tags disponíveis para seleção -->
-                @if(tags?.length > 0){
-                  <hr />
-                  
-                  @if(
-                    (tags?.length != 1 && this.formPesquisaTag.controls.nomePesquisaTag.value.length > 0) 
-                    || this.formPesquisaTag.controls.nomePesquisaTag.value.length == 0){
+                        ? "Selecione abaixo para começar a editar"
+                        : "Nenhuma categoria encontrada!"
+                        }}
+                      </span>
+                    </div>
+                  }
+                  <!-- Lista de tags disponíveis para seleção -->
+                  @if(tags?.length > 0){
+                    <hr />
+                    @if(
+                      (tags?.length != 1 && this.formPesquisaTag.controls.nomePesquisaTag.value.length > 0)
+                      || this.formPesquisaTag.controls.nomePesquisaTag.value.length == 0){
                       <div class="d-flex justify-content-around align-items-center">
                         <span
                           >Categorias encontradas: (mostrando {{ tags.length }} de
@@ -126,7 +126,7 @@
                         <button
                           *ngIf="isExpandedTagList && this.formPesquisaTag.controls.nomePesquisaTag.value.length == 0"
                           class="btn btn-primary ms-2" (click)="expandSearchList()">
-                          <img class="btn-icon" src="icons/ui/white/collapse_icon.svg" alt="">
+                          <img class="btn-icon" src="assets/icones/operacoes/white/collapse_icon.svg" alt="">
                         </button>
                       </div>
                   }
@@ -148,14 +148,14 @@
                       *ngIf="!isExpandedTagList && this.formPesquisaTag.controls.nomePesquisaTag.value.length == 0"
                       type="button"
                       class="btn btn-primary ms-2" (click)="expandSearchList()">
-                      <img class="btn-icon" src="icons/ui/white/expand_icon.svg" alt="">
+                      <img class="btn-icon" src="assets/icones/operacoes/white/expand_icon.svg" alt="">
                     </button> 
 
                      <button
                         *ngIf="isExpandedTagList && this.formPesquisaTag.controls.nomePesquisaTag.value.length == 0"
                         type="button"
                         class="btn btn-primary ms-2" (click)="expandSearchList()">
-                        <img class="btn-icon" src="icons/ui/white/collapse_icon.svg" alt="">
+                        <img class="btn-icon" src="assets/icones/operacoes/white/collapse_icon.svg" alt="">
                       </button>
                   </div>
                 }
@@ -172,14 +172,13 @@
                     >
                   </div>
                 }
-                </ng-container>
               } @else {
                 @if(FormGroupSelected == formEditTag){
                   <app-form-field
                     [formGroup]="formEditTag"
                     formName="form-edit-tag"
                     controlName="nomeEditTag"
-                    icon="icons/shared/black/tag_icon.svg"
+                    icon="assets/icones/black/tag_icon.svg"
                     label="Nome da categoria:"
                     placeholder="Digite o novo nome da categoria"
                     fieldType="input"
@@ -188,14 +187,14 @@
                       formValidatorsEnum.Required,
                       formValidatorsEnum.MinLength
                     ]"
-                  ></app-form-field>
+                    ></app-form-field>
 
                   @if(!this.tagPreloaded){
                     <div
                       class="texto-informativo d-flex justify-content-center align-items-center mt-2"
                     >
                       <img
-                        src="icons/ui/black/info_icon.svg"
+                        src="assets/icones/black/info_icon.svg"
                         alt="ícone de informação"
                       />
                       <span>Clique no botão de voltar para pesquisar por outra categoria</span>
@@ -208,7 +207,7 @@
                     [formGroup]="formExclusaoTag"
                     formName="form-exclusao-tag"
                     controlName="nomeExclusaoTag"
-                    icon="icons/shared/black/tag_icon.svg"
+                    icon="assets/icones/black/tag_icon.svg"
                     label="Nome da categoria:"
                     fieldType="input"
                   ></app-form-field>
@@ -226,7 +225,7 @@
               id="botao-voltar-footer"
               (click)="resetSearchForm()"
             >
-              <img class="btn-icon" src="icons/ui/white/return_icon.svg" alt="Ícone de voltar">
+              <img class="btn-icon" src="assets/icones/operacoes/white/return_icon.svg" alt="Ícone de voltar">
               Voltar
             </button>
           }
@@ -235,7 +234,7 @@
             class="btn btn-tertiary"
             data-bs-dismiss="modal"
           >
-            <img class="btn-icon" src="icons/ui/black/cancel_icon.svg" alt="Ícone de voltar">
+            <img class="btn-icon" src="assets/icones/operacoes/black/cancel_icon.svg" alt="Ícone de voltar">
             Cancelar
           </button>
           <button
@@ -244,7 +243,7 @@
             class="btn btn-{{modalTypeSelected == modalTypes.Exclusao ? 'secondary' : 'primary'}}"
             *ngIf="tagSelected || modalTypeSelected == modalTypes.Adicao"
           >
-           <img class="btn-icon" src="icons/actions/white/{{ModalInfo.icon}}_icon.svg" alt="Ícone de voltar">
+           <img class="btn-icon" src="assets/icones/operacoes/white/{{ModalInfo.icon}}_icon.svg" alt="Ícone de voltar">
             {{ ModalInfo.buttonText }}
           </button>
         </div>
@@ -253,17 +252,17 @@
   </div>
 </div>
 
-<!-- Botões para abrir e fechar o modal via código -->
-<button
-  class="d-none"
-  [attr.data-bs-target]="'#modalTag'"
-  [attr.data-bs-toggle]="'modal'"
-  #botaoChamarModal
-></button>
+  <!-- Botões para abrir e fechar o modal via código -->
+  <button
+    class="d-none"
+    [attr.data-bs-target]="'#modalTag'"
+    [attr.data-bs-toggle]="'modal'"
+    #botaoChamarModal
+  ></button>
 
-<button
-  class="d-none"
-  [attr.data-bs-target]="'#modalTag'"
-  [attr.data-bs-toggle]="'modal'"
-  #botaoFecharModal
-></button>
+  <button
+    class="d-none"
+    [attr.data-bs-target]="'#modalTag'"
+    [attr.data-bs-toggle]="'modal'"
+    #botaoFecharModal
+  ></button>

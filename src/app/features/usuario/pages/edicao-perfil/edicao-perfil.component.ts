@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+
 import { Component, inject, OnInit } from '@angular/core';
 import { FormFieldComponent } from '@shared/components/form-field/form-field.component';
 import { UserService } from '@features/usuario/services/user.service';
@@ -15,11 +15,11 @@ import { FormValidatorEnum } from '@shared/enums/form-validator.enum';
 import { AuthService } from '@core/services/auth.service';
 
 @Component({
-  selector: 'app-edicao-perfil',
-  standalone: true,
-  imports: [CommonModule, FormFieldComponent, ReactiveFormsModule],
-  templateUrl: './edicao-perfil.component.html',
-  styleUrl: './edicao-perfil.component.css',
+    selector: 'app-edicao-perfil',
+    imports: [FormFieldComponent, ReactiveFormsModule],
+    templateUrl: './edicao-perfil.component.html',
+    styleUrl: './edicao-perfil.component.css',
+    standalone:true
 })
 export class EdicaoPerfilComponent implements OnInit {
   protected cadastroErrorStatus: RegistrationErrorEnum = RegistrationErrorEnum.None;

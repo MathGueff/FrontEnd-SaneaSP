@@ -21,84 +21,86 @@
         }
       </div>
 
-      @if(reclamacao.Imagens.length > 1){
-      <button class="carousel-control-prev" type="button" data-bs-target="#carouselImage" data-bs-slide="prev">
-        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Previous</span>
-      </button>
-      <button class="carousel-control-next" type="button" data-bs-target="#carouselImage" data-bs-slide="next">
-        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Next</span>
-      </button>
-      }
-    </div>
-    <article class="col text-center">
-      <h1 class="h3">{{ reclamacao.titulo }}</h1>
-      <span class="h6">
-        {{ reclamacao.data | date }}
-      </span>
-    </article>
-    <article class="col">
-      <section class="d-flex flex-row justify-content-between h6">
-        <div class="situacao">
-          Situação:<span> {{situation}} </span>
-        </div>
-        <div class="pontuacao">
-          Pontuação:<span> {{ reclamacao.pontuacao }}</span>
-        </div>
-      </section>
-      @if(reclamacao.Categorias.length > 0){
-      <section class="tags d-flex align-items-center me-md-0 mt-md-4 m-md-0 gap-md-2">
-        <span class="tag text-center" *ngFor="let tag of reclamacao.Categorias">
-          {{ tag.nome }}
-        </span>
-      </section>
-      }
-    </article>
-  </header>
-  <article class="pb-3 my-3 info ms-3 me-4">
-    <div class="descricao row">
-      <h3 class="h5 fw-semibold">Descrição:</h3>
-      <p class="paragraf-painel">
-        {{ reclamacao.descricao }}
-      </p>
-    </div>
-    <div class="localizacao w-50 m-auto">
-      <h3 class="h5 fw-semibold">Localização:</h3>
-      <div class="dado row gap-2">
-        <p class="fw-bold col-md-5 col-sm">Rua</p>
-        <span class="fw-normal col-md-5 col-sm">{{ reclamacao.rua }}</span>
-      </div>
-      <div class="dado row gap-2">
-        <p class="fw-bold col-md-5 col-sm">Número</p>
-        <span class="fw-normal col-md-5 col-sm">{{ reclamacao.numero }}</span>
-      </div>
-      @if(reclamacao.complemento){
-        <div class="dado row gap-2">
-          <p class="fw-bold col-md-5 col-sm">Complemento</p>
-          <span class="fw-normal col-md-5 col-sm">{{reclamacao.complemento}}</span>
-        </div>
-       }
-      <div class="dado row gap-2">
-        <p class="fw-bold col-md-5 col-sm">Cidade</p>
-        <span class="fw-normal col-md-5 col-sm">{{ reclamacao.cidade }}</span>
-      </div>
-      <div class="dado row gap-2">
-        <p class="fw-bold col-md-5 col-sm">Bairro</p>
-        <span class="fw-normal col-md-5 col-sm">{{ reclamacao.bairro }}</span>
-      </div>
-    </div>
-  </article>
+              @if(reclamacao.Imagens.length > 1){
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselImage" data-bs-slide="prev">
+                  <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                  <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselImage" data-bs-slide="next">
+                  <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                  <span class="visually-hidden">Next</span>
+                </button>
+              }
+            </div>
+            <article class="col text-center">
+              <h1 class="h3">{{ reclamacao.titulo }}</h1>
+              <span class="h6">
+                {{ reclamacao.data | date }}
+              </span>
+            </article>
+            <article class="col">
+              <section class="d-flex flex-row justify-content-between h6">
+                <div class="situacao">
+                  Situação:<span> {{situation}} </span>
+                </div>
+                <div class="pontuacao">
+                  Pontuação:<span> {{ reclamacao.pontuacao }}</span>
+                </div>
+              </section>
+              @if(reclamacao.Categorias.length > 0){
+                <section class="tags d-flex align-items-center me-md-0 mt-md-4 m-md-0 gap-md-2">
+                  @for (tag of reclamacao.Categorias; track tag) {
+                    <span class="tag text-center">
+                      {{ tag.nome }}
+                    </span>
+                  }
+                </section>
+              }
+            </article>
+          </header>
+          <article class="pb-3 my-3 info ms-3 me-4">
+            <div class="descricao row">
+              <h3 class="h5 fw-semibold">Descrição:</h3>
+              <p class="paragraf-painel">
+                {{ reclamacao.descricao }}
+              </p>
+            </div>
+            <div class="localizacao w-50 m-auto">
+              <h3 class="h5 fw-semibold">Localização:</h3>
+              <div class="dado row gap-2">
+                <p class="fw-bold col-md-5 col-sm">Rua</p>
+                <span class="fw-normal col-md-5 col-sm">{{ reclamacao.rua }}</span>
+              </div>
+              <div class="dado row gap-2">
+                <p class="fw-bold col-md-5 col-sm">Número</p>
+                <span class="fw-normal col-md-5 col-sm">{{ reclamacao.numero }}</span>
+              </div>
+              @if(reclamacao.complemento){
+                <div class="dado row gap-2">
+                  <p class="fw-bold col-md-5 col-sm">Complemento</p>
+                  <span class="fw-normal col-md-5 col-sm">{{reclamacao.complemento}}</span>
+                </div>
+              }
+              <div class="dado row gap-2">
+                <p class="fw-bold col-md-5 col-sm">Cidade</p>
+                <span class="fw-normal col-md-5 col-sm">{{ reclamacao.cidade }}</span>
+              </div>
+              <div class="dado row gap-2">
+                <p class="fw-bold col-md-5 col-sm">Bairro</p>
+                <span class="fw-normal col-md-5 col-sm">{{ reclamacao.bairro }}</span>
+              </div>
+            </div>
+          </article>
 
-  <footer class="d-flex justify-content-between my-3 ms-3 me-4">
-    <a class="btn btn-primary" routerLink="{{ caminhoVoltar }}">Voltar</a>
-    <a class="btn btn-primary" routerLink="/comentario/{{ reclamacao.id }}">Ir para Comentários</a>
-  </footer>
-</section>
-}
+          <footer class="d-flex justify-content-between my-3 ms-3 me-4">
+            <a class="btn btn-primary" routerLink="{{ caminhoVoltar }}">Voltar</a>
+            <a class="btn btn-primary" routerLink="/comentario/{{ reclamacao.id }}">Ir para Comentários</a>
+          </footer>
+        </section>
+      }
 
-} @else {
-<div class="erro my-5 m-auto">
-  <app-not-found [mensageError]="erro" [caminhoVoltar]="caminhoVoltar"></app-not-found>
-</div>
-}
+    } @else {
+      <div class="erro my-5 m-auto">
+        <app-not-found [mensageError]="erro" [caminhoVoltar]="caminhoVoltar"></app-not-found>
+      </div>
+    }

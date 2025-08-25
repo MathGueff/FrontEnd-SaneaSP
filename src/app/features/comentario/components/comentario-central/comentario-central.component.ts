@@ -12,18 +12,17 @@ import { IReclamacao } from '@features/reclamacao/models/reclamacao.model';
 import { ReclamacaoService } from '@features/reclamacao/services/reclamacao.service';
 
 @Component({
-  selector: 'app-comentario-central',
-  standalone: true,
-  imports: [
-    CommonModule,
-    ComentarioCimaComponent,
-    ComentarioBaixoComponent,
-    ComentarioInputComponent,
-    RouterModule,
-    NotFoundComponent
-  ],
-  templateUrl: './comentario-central.component.html',
-  styleUrl: './comentario-central.component.css',
+    selector: 'app-comentario-central',
+    imports: [
+        CommonModule,
+        ComentarioCimaComponent,
+        ComentarioBaixoComponent,
+        ComentarioInputComponent,
+        RouterModule,
+        NotFoundComponent
+    ],
+    templateUrl: './comentario-central.component.html',
+    styleUrl: './comentario-central.component.css'
 })
 export class ComentarioCentralComponent implements OnInit {
   private userService = inject(UserService);

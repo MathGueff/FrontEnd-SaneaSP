@@ -22,21 +22,23 @@
         </div>
 
         <div class="col-md-12 col-sm-12 mb-3">
-          <img class="form-icon me-1" src="images/denuncia/description-icon.svg" />
+          <img class="form-icon me-1" src="img/paginas/reclamacoes/description-icon.svg" />
           <label for="descricao" class="form-label">Descricao:
             <span class="required-form">*</span>
           </label>
           <textarea class="form-control" formControlName="descricao" rows="5" placeholder="Explique sua Deúncia"
             (input)="autoResize()" id="descricao"></textarea>
-          <div *ngIf="
+            @if (
               form.get('descricao')?.invalid && form.get('descricao')?.touched
-            ">
-            <p class="invalid-form ms-3">Campo obrigatório</p>
+              ) {
+              <div>
+                <p class="invalid-form ms-3">Campo obrigatório</p>
+              </div>
+            }
           </div>
-        </div>
 
         <div class="col-md-6 col-sm-12 mb-3">
-          <img class="icon me-1" src="images/login/endereco_icon.svg" />
+          <img class="icon me-1" src="assets/login/endereco_icon.svg" />
           <label for="cep" class="form-label">CEP:
             <span class="required-form">*</span>
           </label>
@@ -47,7 +49,7 @@
         </div>
 
         <div class="col-md-6 col-sm-12 mb-3">
-          <img class="icon me-1" src="images/login/endereco_icon.svg" />
+          <img class="icon me-1" src="assets/login/endereco_icon.svg" />
           <label for="rua" class="form-label">Rua:
             <span class="required-form">*</span>
           </label>
@@ -58,7 +60,7 @@
         </div>
 
         <div class="col-md-6 col-sm-12 mb-3">
-          <img class="icon me-1" src="images/login/endereco_icon.svg" />
+          <img class="icon me-1" src="assets/login/endereco_icon.svg" />
           <label for="bairro" class="form-label">Bairro:
             <span class="required-form">*</span>
           </label>
@@ -70,7 +72,7 @@
         </div>
 
         <div class="col-md-6 col-sm-12 mb-3">
-          <img class="icon me-1" src="images/login/endereco_icon.svg" />
+          <img class="icon me-1" src="assets/login/endereco_icon.svg" />
           <label for="cidade" class="form-label">Cidade:
             <span class="required-form">*</span>
           </label>
@@ -82,7 +84,7 @@
         </div>
 
         <div class="col-md-6 col-sm-12 mb-3">
-          <img class="icon me-1" src="images/login/endereco_icon.svg" />
+          <img class="icon me-1" src="assets/login/endereco_icon.svg" />
           <label for="numero" class="form-label">Número:
             <span class="required-form">*</span>
           </label>
@@ -94,35 +96,35 @@
         </div>
 
         <div class="col-md-6 col-sm-12 mb-3">
-          <img class="icon me-1" src="images/login/endereco_icon.svg" />
+          <img class="icon me-1" src="assets/login/endereco_icon.svg" />
           <label for="complemento" class="form-label">Complemento: </label>
           <input type="text" formControlName="complemento" class="form-control" id="complemento"
             placeholder="Complemento" />
         </div>
 
-        <hr />
+                  <hr />
 
-        <app-tag-select [tagSelected]="reclamacao.Categorias"  (alertSelected)="tagsChange($event)"></app-tag-select>
+                  <app-tag-select [tagSelected]="reclamacao.Categorias"  (alertSelected)="tagsChange($event)"></app-tag-select>
 
-        <app-image-select  (alertImageSelect)="imagesChange($event)"></app-image-select>
-        <div class="botoes d-flex justify-content-between w-100 align-items-center">
-          <a routerLink="@" class="mt-3">
-            <button class="form-btn">voltar</button>
-          </a>
+                  <app-image-select  (alertImageSelect)="imagesChange($event)"></app-image-select>
+                  <div class="botoes d-flex justify-content-between w-100 align-items-center">
+                    <a routerLink="@" class="mt-3">
+                      <button class="form-btn">voltar</button>
+                    </a>
 
-          <button type="submit" (click)="onSubmit()" class="mt-3 form-btn">
-            salvar
-          </button>
+                    <button type="submit" (click)="onSubmit()" class="mt-3 form-btn">
+                      salvar
+                    </button>
+                  </div>
+                </form>
+                <!-- Botão de entrar -->
+              </div>
+              <!-- Fim do formulário -->
+            } @else {
+              <article class="my-5">
+                <app-not-found [mensageError]="erro" [caminhoVoltar]="path"></app-not-found>
+              </article>
+
+            }
+          </article>
         </div>
-      </form>
-      <!-- Botão de entrar -->
-    </div>
-    <!-- Fim do formulário -->
-    } @else {
-    <article class="my-5">
-      <app-not-found [mensageError]="erro" [caminhoVoltar]="path"></app-not-found>
-    </article>
-
-    }
-  </article>
-</div>

@@ -17,61 +17,63 @@
           <!-- <span class="ms-2">Filtro</span> -->
           <div class="d-flex justify-content-between align-items-center">
             <button class="btn-acoes" (click)="openTagModal(ModalTypeEnum.Adicao)">
-              <img src="icons/actions/white/add_icon.svg" alt="Ícone de adicionar categoria">
+              <img src="assets/icones/operacoes/white/add_icon.svg" alt="Ícone de adicionar categoria">
               Cadastrar</button>
             <button class="btn-acoes" (click)="openTagModal(ModalTypeEnum.Edicao)">
-              <img src="icons/actions/white/edit_icon.svg" alt="Ícone de editar categoria">
+              <img src="assets/icones/operacoes/white/edit_icon.svg" alt="Ícone de editar categoria">
               Editar</button>
             <button class="btn-acoes" (click)="openTagModal(ModalTypeEnum.Exclusao)">
-              <img src="icons/actions/white/delete_icon.svg" alt="Ícone de excluir categoria">
+              <img src="assets/icones/operacoes/white/delete_icon.svg" alt="Ícone de excluir categoria">
               Excluir</button>
           </div>
       </div>
-        <div class="row justify-content-center">
-          <table class="tag-table">
-            <thead>
-              <tr>
-                <th>Id</th>
-                <th>Nome da categoria</th>
-                <th>Cor da categoria </th>
-                <th>Ações</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr *ngFor="let tag of tags$ | async" (click)="openTagModal(ModalTypeEnum.Edicao, tag)">
+      <div class="row justify-content-center">
+        <table class="tag-table">
+          <thead>
+            <tr>
+              <th>Id</th>
+              <th>Nome da categoria</th>
+              <th>Cor da categoria </th>
+              <th>Ações</th>
+            </tr>
+          </thead>
+          <tbody>
+            @for (tag of tags$ | async; track tag) {
+              <tr (click)="openTagModal(ModalTypeEnum.Edicao, tag)">
                 <td>{{ tag.id }}</td>
                 <td>{{ tag.nome }}</td>
                 <td>Branco</td>
                 <td>
-                  <button class="btn-acoes" 
+                  <button class="btn-acoes"
                     (click)="openTagModal(ModalTypeEnum.Edicao, tag); $event.stopPropagation()"
                     (keydown.enter)="openTagModal(ModalTypeEnum.Edicao, tag)">
-                      <img src="icons/actions/white/edit_icon.svg" alt="Ícone de editar tag">
+                      <img src="assets/icones/operacoes/white/edit_icon.svg" alt="Ícone de editar tag">
                       <span>Alterar</span>
                   </button>
-                  <button class="btn-acoes" 
+                  <button class="btn-acoes"
                     (click)="openTagModal(ModalTypeEnum.Exclusao, tag); $event.stopPropagation()"
                     (keydown.enter)="openTagModal(ModalTypeEnum.Exclusao, tag)">
-                      <img src="icons/actions/white/delete_icon.svg" alt="Ícone de excluir tag">
+                      <img src="assets/icones/operacoes/white/delete_icon.svg" alt="Ícone de excluir tag">
                       <span>Deletar</span>
                   </button>
                 </td>
               </tr>
-            </tbody>
-          </table>
-        </div> <!-- Fim da tabela -->
-      </div>
+            }
+          </tbody>
+        </table>
+      </div> <!-- Fim da tabela -->
+    </div>
   </div>
 
-<button
-  class="d-none"
-  [attr.data-bs-target]="'#modalTag'"
-  [attr.data-bs-toggle]="'modal'"
-  #botaoModal
->Cadastrar</button>
+  <button
+    class="d-none"
+    [attr.data-bs-target]="'#modalTag'"
+    [attr.data-bs-toggle]="'modal'"
+    #botaoModal
+  >Cadastrar</button>
 
-<app-tag-modal
-  (submitModalEvent)="resetTable()"
-  [tagPreloaded]="tagSelected"
-  [modalTypeSelected]="currentModalType"
-></app-tag-modal>
+  <app-tag-modal
+    (submitModalEvent)="resetTable()"
+    [tagPreloaded]="tagSelected"
+    [modalTypeSelected]="currentModalType"
+  ></app-tag-modal>

@@ -7,9 +7,11 @@
 
     @if(card.Categorias.length > 0){
       <div class="tags d-flex align-items-center m-md-0 gap-md-2 ">
-      <span class="tag" *ngFor="let tag of card.Categorias">
-          {{tag.nome}}
-        </span>
+        @for (tag of card.Categorias; track tag) {
+          <span class="tag">
+            {{tag.nome}}
+          </span>
+        }
       </div>
     }
 
@@ -20,7 +22,7 @@
           role="listbox"
           data-bs-toggle="dropdown"
           aria-expanded="false"
-        >
+          >
           <img src="assets\icones\white/options_icon.svg" alt="icone de opções">Mais Opções
         </button>
         <ul class="dropdown-menu">
@@ -63,27 +65,27 @@
               }
             </div>
 
-            @if(card.Imagens.length > 1){
-              <button class="carousel-control-prev" type="button" data-bs-target="#carouselImage" data-bs-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Previous</span>
-              </button>
-              <button class="carousel-control-next" type="button" data-bs-target="#carouselImage" data-bs-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Next</span>
-              </button>
-            }
-          </div>
-      </div>
-      <!-- Informações do card -->
-      <div class="col-lg-10 col-md-12">
-        <!-- Organização das informações -->
-        <div class="d-flex align-items-start flex-column ps-md-3 ps-lg-0">
-          <h5 class="card-title mt-md-3">{{ card.titulo }}</h5>
-          <p class="card-text">{{ card.descricao}}</p>
-          <a routerLink="reclamacao-descricao/{{card.id}}" class="btn btn-primary">Saiba Mais</a>
-        </div>
+        @if(card.Imagens.length > 1){
+          <button class="carousel-control-prev" type="button" data-bs-target="#carouselImage" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+          </button>
+          <button class="carousel-control-next" type="button" data-bs-target="#carouselImage" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+          </button>
+        }
       </div>
     </div>
-  </div> <!-- Fim do Body -->
+    <!-- Informações do card -->
+    <div class="col-lg-10 col-md-12">
+      <!-- Organização das informações -->
+      <div class="d-flex align-items-start flex-column ps-md-3 ps-lg-0">
+        <h5 class="card-title mt-md-3">{{ card.titulo }}</h5>
+        <p class="card-text">{{ card.descricao}}</p>
+        <a routerLink="reclamacao-descricao/{{card.id}}" class="btn btn-primary">Saiba Mais</a>
+      </div>
+    </div>
+  </div>
+</div> <!-- Fim do Body -->
 </div> <!-- Fim da div do card -->

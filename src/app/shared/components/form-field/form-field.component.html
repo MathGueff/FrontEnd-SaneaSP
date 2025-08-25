@@ -1,74 +1,86 @@
 <div [formGroup]="formGroup">
-    <!-- FormControl -->
-    <img *ngIf="icon" class="label-icon me-1" [src]="icon">
-    <label [for]="controlName + '-' + formName" class="form-label">
-        {{label}}
-        <span *ngIf="required" class="required-control">*</span>
-    </label>
-    <!-- Baseado no tipo especificado ele mostra um input, textarea ou select -->
-    <div [ngSwitch]="fieldType" >
-        <!-- Caso seja um input -->
-        <input
-            *ngSwitchDefault
-            [formControlName] = "controlName"
-            [name]= "controlName + '-' + formName"
-            [id]="controlName + '-' + formName"
-            [type]="type"
-            [placeholder]="placeholder || ''"
-            class="form-control"
-        >
-        <!-- Caso seja um textarea -->
-        <textarea
-        *ngSwitchCase="'textarea'"
-        [formControlName]="controlName"
-        [name]="controlName + '-' + formName"
-        [id]="controlName + '-' + formName"
-        [placeholder]="placeholder"
-        rows="3"
-        class="form-control"
-        ></textarea>
-        <!-- Caso seja um select -->
-        <select
-        *ngSwitchCase="'select'"
-        [formControlName]="controlName"
-        [name]="controlName + '-' + formName"
-        [id]="controlName + '-' + formName"
-        class="form-control text-center"
-        >
-        <option selected value="NENHUM">Nenhum</option>
-        <option *ngFor="let item of selectList" [value]="item">{{item}}</option>
-    </select>
-        
-        
-    @if (type == 'password' || this.showPassword == true) 
-    {
-        <div class="show_password ms-1" (click)="changeType()" >
-            <img class="icon show_password_icon me-1" src="images/login/{{!showPassword ? 'show_password_icon' : 'hide_password_icon'}}.svg"> 
-            <span class="form-text">{{!showPassword ? 'Mostrar senha' : 'Esconder senha'}}</span>
-        </div>
+  <!-- FormControl -->
+  @if (icon) {
+    <img class="label-icon me-1" [src]="icon">
+  }
+  <label [for]="controlName + '-' + formName" class="form-label">
+    {{label}}
+    @if (required) {
+      <span class="required-control">*</span>
     }
-    </div>
-    
-   
-    <!-- Exibição de erros no formulário -->
+  </label>
+  <!-- Baseado no tipo especificado ele mostra um input, textarea ou select -->
+  <div >
+    @switch (fieldType) {
+      <!-- Caso seja um input -->
+      @default {
+        <input
+          [formControlName] = "controlName"
+          [name]= "controlName + '-' + formName"
+          [id]="controlName + '-' + formName"
+          [type]="type"
+          [placeholder]="placeholder || ''"
+          class="form-control"
+          >
+      }
+      <!-- Caso seja um textarea -->
+      @case ('textarea') {
+        <textarea
+          [formControlName]="controlName"
+          [name]="controlName + '-' + formName"
+          [id]="controlName + '-' + formName"
+          [placeholder]="placeholder"
+          rows="3"
+          class="form-control"
+        ></textarea>
+      }
+      <!-- Caso seja um select -->
+      @case ('select') {
+        <select
+          [formControlName]="controlName"
+          [name]="controlName + '-' + formName"
+          [id]="controlName + '-' + formName"
+          class="form-control text-center"
+          >
+          <option selected value="NENHUM">Nenhum</option>
+          @for (item of selectList; track item) {
+            <option [value]="item">{{item}}</option>
+          }
+        </select>
+      }
+    }
+    @if (type == 'password' || this.showPassword == true)
+      {
+      <div class="show_password ms-1" (click)="changeType()" >
+        <img class="icon show_password_icon me-1" src="assets/login/{{!showPassword ? 'show_password_icon' : 'hide_password_icon'}}.svg">
+        <span class="form-text">{{!showPassword ? 'Mostrar senha' : 'Esconder senha'}}</span>
+      </div>
+    }
+  </div>
 
-    <!--
-        Verifica se o campo é invalido (baseado nos Validators definidos),
-        se foi tocado, e se não tem valor vazio, para então mostrar o span de erro
 
-        Mostra todos spans com erro respectivo ativo
-    -->
+  <!-- Exibição de erros no formulário -->
 
-    <!-- Para cada Validator do controlName -->
-    <div *ngFor="let validator of validators">
-        @if (formGroup.get(controlName)?.touched) {
-            <span
-                *ngIf="formGroup.get(controlName)?.errors?.[validator]"
-                class="texto-validacao-erro-form ms-2"
+  <!--
+  Verifica se o campo é invalido (baseado nos Validators definidos),
+  se foi tocado, e se não tem valor vazio, para então mostrar o span de erro
+
+  Mostra todos spans com erro respectivo ativo
+  -->
+
+  <!-- Para cada Validator do controlName -->
+  @for (validator of validators; track validator) {
+    <div>
+      @if (formGroup.get(controlName)?.touched) {
+        @if (formGroup.get(controlName)?.errors?.[validator]) {
+          <span
+            class="texto-validacao-erro-form ms-2"
             >
-                <img src="images/login/erro_icon.svg" class="icone-validacao-form" alt="">
-                {{getErrorMessage(validator)}}
-            </span>
+            <img src="assets/login/erro_icon.svg" class="icone-validacao-form" alt="">
+            {{getErrorMessage(validator)}}
+          </span>
         }
+      }
     </div>
+  }
 </div>

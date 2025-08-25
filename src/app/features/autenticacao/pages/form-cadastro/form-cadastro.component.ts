@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+
 import { Component, inject, OnInit } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import { NonNullableFormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
@@ -13,11 +13,10 @@ import { SweetAlertService } from '@shared/services/sweet-alert.service';
 import { AuthService } from '@core/services/auth.service';
 
 @Component({
-  selector: 'app-form-cadastro',
-  standalone: true,
-  imports: [RouterLink, CommonModule, FormFieldComponent,ReactiveFormsModule],
-  templateUrl: './form-cadastro.component.html',
-  styleUrls: ['./form-cadastro.component.css', '../links-redes.css']
+    selector: 'app-form-cadastro',
+    imports: [RouterLink, FormFieldComponent, ReactiveFormsModule],
+    templateUrl: './form-cadastro.component.html',
+    styleUrls: ['./form-cadastro.component.css', '../links-redes.css']
 })
 
 export class FormCadastroComponent implements OnInit {

@@ -2,17 +2,17 @@ import { Component, inject, OnInit } from '@angular/core';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { Observable } from 'rxjs';
 import { CommonModule } from '@angular/common';
-import { NotFoundComponent } from '@shared/components/not-found/not-found.component';
 import { IReclamacao } from '@features/reclamacao/models/reclamacao.model';
 import { ReclamacaoService } from '@features/reclamacao/services/reclamacao.service';
 import { StatusReclamacao } from '@features/reclamacao/models/reclamacao.model';
+import { NotFoundComponent } from '@shared/components/not-found/not-found.component';
 
 @Component({
-  selector: 'app-reclamacao-descricao',
-  standalone: true,
-  imports: [CommonModule,RouterLink,NotFoundComponent],
-  templateUrl: './reclamacao-descricao.component.html',
-  styleUrl: './reclamacao-descricao.component.css'
+    selector: 'app-reclamacao-descricao',
+    imports: [CommonModule, RouterLink, NotFoundComponent],
+    templateUrl: './reclamacao-descricao.component.html',
+    styleUrl: './reclamacao-descricao.component.css',
+    standalone:true
 })
 export class ReclamacaoDescricaoComponent implements OnInit {
   //Observable de reclamacao

@@ -1,5 +1,5 @@
 import { Component, ElementRef, HostListener, OnInit, ViewChild } from '@angular/core';
-import { CommonModule } from '@angular/common';
+
 import { RouterLink } from '@angular/router';
 import { Router } from '@angular/router';
 import { AdminSidebarOptions} from '@features/administrador/models/admin-sidebar-options.enum';
@@ -9,11 +9,10 @@ import { ILinkPanelAdmin, ILinkSidebarAdmin } from '@features/administrador/mode
 import { AuthService } from '@core/services/auth.service';
 
 @Component({
-  selector: 'app-menu-admin',
-  standalone: true,
-  imports: [CommonModule, RouterLink, TagModalComponent],
-  templateUrl: './menu-admin.component.html',
-  styleUrl: './menu-admin.component.css',
+    selector: 'app-menu-admin',
+    imports: [RouterLink, TagModalComponent],
+    templateUrl: './menu-admin.component.html',
+    styleUrl: './menu-admin.component.css'
 })
 export class MenuAdminComponent implements OnInit {
   constructor(private router: Router, private authService : AuthService) {}

@@ -7,11 +7,11 @@ import { UserService } from '@features/usuario/services/user.service';
 import { AuthService } from '@core/services/auth.service';
 
 @Component({
-  selector: 'app-navbar',
-  standalone: true,
-  imports: [CommonModule, RouterLink, RouterLinkActive, LoginLinkComponent],
-  templateUrl: './navbar.component.html',
-  styleUrl: './navbar.component.css'
+    selector: 'app-navbar',
+    imports: [CommonModule, RouterLink, RouterLinkActive, LoginLinkComponent],
+    templateUrl: './navbar.component.html',
+    styleUrl: './navbar.component.css',
+    standalone:true
 })
 export class NavbarComponent {
   protected userService = inject(UserService);

@@ -1,36 +1,38 @@
 <div class="background"> <!-- background -->
-    <div class="container-fluid d-flex justify-content-center align-items-center"> <!-- Div do container-->
-        <!-- Início do formulário -->
-        <form [formGroup]="formLogin" (ngSubmit)="onSubmit()" class="form d-flex justify-content-center align-items-center flex-column m-3 p-3 rounded">
-            <h3 class="mb-4">Faça login</h3>
-            <!-- Campos de entrada -->
-            <div class="row mt-3" style="width: 100%; max-width: 270px;">
-                <!-- Controls do formulário -->
-                <div class="col-md-12 col-sm-12 mb-3" *ngFor="let input of inputs">
-                    <app-form-field
-                        [formGroup]="this.formLogin"
-                        type = {{input.type}}
-                        formName="form-login"
-                        controlName="{{input.controlName}}"
-                        icon="{{input.icon}}"
-                        label="{{input.label}}"
-                        placeholder="{{input.placeholder}}"
-                        [required]="input.required || false"
-                        [validators]="input.validators || []"
-                        [fieldType]="input.typeField || ''"
-                    >
-                    </app-form-field>
-                </div>
-            </div>
-            <!-- Fim dos campos -->
+  <div class="container-fluid d-flex justify-content-center align-items-center"> <!-- Div do container-->
+    <!-- Início do formulário -->
+    <form [formGroup]="formLogin" (ngSubmit)="onSubmit()" class="form d-flex justify-content-center align-items-center flex-column m-3 p-3 rounded">
+      <h3 class="mb-4">Faça login</h3>
+      <!-- Campos de entrada -->
+      <div class="row mt-3" style="width: 100%; max-width: 270px;">
+        <!-- Controls do formulário -->
+        @for (input of inputs; track input) {
+          <div class="col-md-12 col-sm-12 mb-3">
+            <app-form-field
+              [formGroup]="this.formLogin"
+              type = {{input.type}}
+              formName="form-login"
+              controlName="{{input.controlName}}"
+              icon="{{input.icon}}"
+              label="{{input.label}}"
+              placeholder="{{input.placeholder}}"
+              [required]="input.required || false"
+              [validators]="input.validators || []"
+              [fieldType]="input.typeField || ''"
+              >
+            </app-form-field>
+          </div>
+        }
+      </div>
+      <!-- Fim dos campos -->
 
-            <!-- Link para redefinição de senha -->
-            <div class="mb-3">
-                <a routerLink="" class="link-form">Esqueci minha senha</a>
-            </div>
-            
-            <!-- Botão de entrar -->
-            <button class="form-btn" type="submit">ENTRAR</button>
+      <!-- Link para redefinição de senha -->
+      <div class="mb-3">
+        <a routerLink="" class="link-form">Esqueci minha senha</a>
+      </div>
+
+      <!-- Botão de entrar -->
+      <button class="form-btn" type="submit">ENTRAR</button>
 
             <!-- Links para entrada com redes sociais -->
             <div class="links-redes d-flex justify-content-between align-items-center mt-4 w-50">
@@ -39,10 +41,10 @@
                 <a href=""><img src="images/login/x_icon.svg" alt="Login com conta google"></a>
             </div>
 
-            <!-- Link para página de cadastro -->
-            <div class="mt-4">
-                <span class="texto-link-form">Não possui uma conta? <a routerLink="/cadastro" class="link-form">Clique para criar uma</a></span>
-            </div>
-        </form> <!-- Fim do formulário -->
-    </div>
+      <!-- Link para página de cadastro -->
+      <div class="mt-4">
+        <span class="texto-link-form">Não possui uma conta? <a routerLink="/cadastro" class="link-form">Clique para criar uma</a></span>
+      </div>
+    </form> <!-- Fim do formulário -->
+  </div>
 </div>

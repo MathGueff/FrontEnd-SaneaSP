@@ -12,17 +12,16 @@ import { TagSelectComponent } from '@shared/components/tag-select/tag-select.com
 import { ICategoria } from '@features/categoria/models/categoria.model';
 
 @Component({
-  selector: 'app-reclamacao-inicial',
-  standalone: true,
-  imports: [
-    CommonModule,
-    ReclamacaoCardComponent,
-    RouterLink,
-    NotFoundComponent,
-    TagSelectComponent,
-  ],
-  templateUrl: './reclamacao-inicial.component.html',
-  styleUrl: '../reclamacao-usuarios/reclamacao-usuarios.component.css',
+    selector: 'app-reclamacao-inicial',
+    imports: [
+        CommonModule,
+        ReclamacaoCardComponent,
+        RouterLink,
+        NotFoundComponent,
+        TagSelectComponent,
+    ],
+    templateUrl: './reclamacao-inicial.component.html',
+    styleUrl: '../reclamacao-usuarios/reclamacao-usuarios.component.css'
 })
 export class ReclamacaoInicialComponent implements OnInit {
   protected authService = inject(AuthService);

@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+
 import { Component, inject, OnInit } from '@angular/core';
 import { NonNullableFormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
@@ -12,11 +12,11 @@ import { ICategoria } from '@features/categoria/models/categoria.model';
 import { SweetAlertService } from '@shared/services/sweet-alert.service';
 
 @Component({
-  selector: 'app-reclamacao-edicao',
-  standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, NotFoundComponent, TagSelectComponent, ImageSelectComponent],
-  templateUrl: './reclamacao-edicao.component.html',
-  styleUrl: './reclamacao-edicao.component.css'
+    selector: 'app-reclamacao-edicao',
+    imports: [ReactiveFormsModule, NotFoundComponent, TagSelectComponent, ImageSelectComponent],
+    templateUrl: './reclamacao-edicao.component.html',
+    styleUrl: './reclamacao-edicao.component.css',
+    standalone:true
 })
 export class ReclamacaoEdicaoComponent implements OnInit {
     private reclamacaoService = inject(ReclamacaoService);

@@ -9,49 +9,51 @@
           class="img-fluid"
           src="images/denuncia/reclamacao.svg"
           alt="banner reclamacao"
-        />
-      </figure>
-      <div class="col-md-7 col-lg-8">
-        <p>
-          Denunciar e fazer reclamações sobre problemas de esgoto e água é
-          essencial para garantir a saúde pública, prevenir doenças e proteger o
-          meio ambiente. Ao relatar esses problemas, ajudamos a incentivar as
-          autoridades para que realizem as devidas manutenções e reparos,
-          garantindo um saneamento básico adequado. Além disso, ações corretivas
-          evitam a contaminação de rios e mares, preservando os recursos
-          hídricos para as futuras gerações.
-        </p>
+          />
+        </figure>
+        <div class="col-md-7 col-lg-8">
+          <p>
+            Denunciar e fazer reclamações sobre problemas de esgoto e água é
+            essencial para garantir a saúde pública, prevenir doenças e proteger o
+            meio ambiente. Ao relatar esses problemas, ajudamos a incentivar as
+            autoridades para que realizem as devidas manutenções e reparos,
+            garantindo um saneamento básico adequado. Além disso, ações corretivas
+            evitam a contaminação de rios e mares, preservando os recursos
+            hídricos para as futuras gerações.
+          </p>
+        </div>
       </div>
-    </div>
-  </section>
-  <section class="row mb-5">
-    <div class="col text-center adicionar">
-      <h2 class="mb-4">Adicione sua Denúncia</h2>
-      <div class="adicionar-btn  w-75 py-3">
-        <a routerLink="../reclamacao/reclamacao-form" class="btn btn-primary rounded-pill w-25 py-3"
-        >Adicionar</a>
+    </section>
+    <section class="row mb-5">
+      <div class="col text-center adicionar">
+        <h2 class="mb-4">Adicione sua Denúncia</h2>
+        <div class="adicionar-btn  w-75 py-3">
+          <a routerLink="../reclamacao/reclamacao-form" class="btn btn-primary rounded-pill w-25 py-3"
+          >Adicionar</a>
+        </div>
       </div>
-    </div>
-  </section>
-  <section class="row mb-5 w-75 m-auto tag h-auto">
-    <h2 class="text-center">Filtre pelas Categorias</h2>
-    <app-tag-select [isFiltro]="true"  (Buscar)="PesquisarPorTag()" (alertSelected)="ChangeTag($event)"></app-tag-select>
+    </section>
+    <section class="row mb-5 w-75 m-auto tag h-auto">
+      <h2 class="text-center">Filtre pelas Categorias</h2>
+      <app-tag-select [isFiltro]="true"  (Buscar)="PesquisarPorTag()" (alertSelected)="ChangeTag($event)"></app-tag-select>
 
-  </section>
+    </section>
 
-  <section class="row mt-4 mb-4 cards-div">
-    <!-- Row onde ficam os cards -->
-    @if (!vazio) { <!-- Verifica se tem valor na lista -->
+    <section class="row mt-4 mb-4 cards-div">
+      <!-- Row onde ficam os cards -->
+      @if (!vazio) { <!-- Verifica se tem valor na lista -->
 
-      <!-- verificando se houve atualização da lista -->
-      <article class="col-12 p-4 ps-5 pe-5" *ngFor="let reclamacao of reclamacoes$ | async">
-        <!-- Coluna do card-->
-        <app-reclamacao-card (onDelete)="getUserReclamacoes()" [card]="reclamacao" [user]="user" ></app-reclamacao-card>
-      </article>
-      <!-- Fim da Coluna do card -->
+        <!-- verificando se houve atualização da lista -->
+        @for (reclamacao of reclamacoes$ | async; track reclamacao) {
+          <article class="col-12 p-4 ps-5 pe-5">
+            <!-- Coluna do card-->
+            <app-reclamacao-card (onDelete)="getUserReclamacoes()" [card]="reclamacao" [user]="user" ></app-reclamacao-card>
+          </article>
+        }
+        <!-- Fim da Coluna do card -->
 
-    }
-    @else {
+      }
+      @else {
       <section class="col m-5">
         <app-not-found [mensageError] = "erro"></app-not-found>
       </section>

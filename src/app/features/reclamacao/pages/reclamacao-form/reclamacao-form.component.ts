@@ -1,5 +1,5 @@
 import { SweetAlertService } from '@shared/services/sweet-alert.service';
-import { CommonModule } from '@angular/common';
+
 import { Component, inject, OnInit } from '@angular/core';
 import {
   NonNullableFormBuilder,
@@ -16,11 +16,11 @@ import { ImageSelectComponent } from "@shared/components/image-select/image-sele
 
 
 @Component({
-  selector: 'app-reclamacao-form',
-  standalone: true,
-  imports: [ReactiveFormsModule, CommonModule, RouterLink, TagSelectComponent, ImageSelectComponent],
-  templateUrl: './reclamacao-form.component.html',
-  styleUrl: './reclamacao-form.component.css',
+    selector: 'app-reclamacao-form',
+    imports: [ReactiveFormsModule, RouterLink, TagSelectComponent, ImageSelectComponent],
+    templateUrl: './reclamacao-form.component.html',
+    styleUrl: './reclamacao-form.component.css',
+    standalone:true
 })
 export class ReclamacaoFormComponent implements OnInit {
 

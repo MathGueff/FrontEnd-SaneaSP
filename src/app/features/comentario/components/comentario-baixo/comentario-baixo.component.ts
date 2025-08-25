@@ -3,11 +3,10 @@ import { Comentario } from '../../models/comentario.model';
 import { Component, inject, Input, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-comentario-baixo',
-  standalone: true,
-  imports: [],
-  templateUrl: './comentario-baixo.component.html',
-  styleUrl: './comentario-baixo.component.css',
+    selector: 'app-comentario-baixo',
+    imports: [],
+    templateUrl: './comentario-baixo.component.html',
+    styleUrl: './comentario-baixo.component.css'
 })
 export class ComentarioBaixoComponent implements OnInit {
   @Input() comentario!: Comentario;

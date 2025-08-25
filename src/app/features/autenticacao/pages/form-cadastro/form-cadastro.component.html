@@ -6,42 +6,46 @@
       <h3 class="mb-4">Cadastre-se</h3>
       <!-- Campos do formulário -->
       <div class="row mt-3" style="width: 100%; max-width: 600px;">
-        <div class="col-md-6 col-sm-12 mb-3" *ngFor="let input of inputs">
-          <app-form-field
-            [formGroup]="this.formCadastro"
-            type = {{input.type}}
-            formName="form-cadastro"
-            controlName="{{input.controlName}}"
-            icon="{{input.icon}}"
-            label="{{input.label}}"
-            placeholder="{{input.placeholder}}"
-            [required]="input.required || false"
-            [validators]="input.validators || []"
-            [fieldType]="input.typeField || ''"
-          >
-          </app-form-field>
-        </div>
+        @for (input of inputs; track input) {
+          <div class="col-md-6 col-sm-12 mb-3">
+            <app-form-field
+              [formGroup]="this.formCadastro"
+              type = {{input.type}}
+              formName="form-cadastro"
+              controlName="{{input.controlName}}"
+              icon="{{input.icon}}"
+              label="{{input.label}}"
+              placeholder="{{input.placeholder}}"
+              [required]="input.required || false"
+              [validators]="input.validators || []"
+              [fieldType]="input.typeField || ''"
+              >
+            </app-form-field>
+          </div>
+        }
         <hr>
-        <div class="col-md-6 col-sm-12 mb-3" *ngFor="let input of addressInputs">
-          <app-form-field
-            [formGroup]="this.formCadastro"
-            type = {{input.type}}
-            formName="form-cadastro"
-            controlName="{{input.controlName}}"
-            icon="{{input.icon}}"
-            label="{{input.label}}"
-            placeholder="{{input.placeholder}}"
-            [required]="input.required || false"
-            [validators]="input.validators || []"
-            [fieldType]="input.typeField || ''"
-          >
-          </app-form-field>
+          @for (input of addressInputs; track input) {
+            <div class="col-md-6 col-sm-12 mb-3">
+              <app-form-field
+                [formGroup]="this.formCadastro"
+                type = {{input.type}}
+                formName="form-cadastro"
+                controlName="{{input.controlName}}"
+                icon="{{input.icon}}"
+                label="{{input.label}}"
+                placeholder="{{input.placeholder}}"
+                [required]="input.required || false"
+                [validators]="input.validators || []"
+                [fieldType]="input.typeField || ''"
+                >
+              </app-form-field>
+            </div>
+          }
         </div>
-      </div>
 
-      <!-- Texto explicativo e botão -->
-      <span class="small mt-2 mb-2">Saiba porque precisamos dessas informações de contato <a
-          class="link-form">aqui</a>
+        <!-- Texto explicativo e botão -->
+        <span class="small mt-2 mb-2">Saiba porque precisamos dessas informações de contato <a
+        class="link-form">aqui</a>
       </span>
 
       <!-- Botão de entrar -->

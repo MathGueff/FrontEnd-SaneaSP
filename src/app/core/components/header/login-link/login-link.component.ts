@@ -5,11 +5,11 @@ import { SweetAlertService } from '@shared/services/sweet-alert.service';
 import { CommonModule } from '@angular/common';
 
 @Component({
-  selector: 'app-login-link',
-  standalone: true,
-  imports: [RouterLink, CommonModule],
-  templateUrl: './login-link.component.html',
-  styleUrl: './login-link.component.css'
+    selector: 'app-login-link',
+    imports: [RouterLink, CommonModule],
+    templateUrl: './login-link.component.html',
+    styleUrl: './login-link.component.css',
+    standalone:true
 })
 export class LoginLinkComponent {
   userAtivo : string | null = null;
